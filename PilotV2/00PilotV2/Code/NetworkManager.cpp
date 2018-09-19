@@ -4,6 +4,11 @@ NetworkManager::NetworkManager() {
 
 }
 
+// Used for Enum ManagerType
+NetworkManager::NetworkManager(int man_type) {
+
+}
+
 NetworkManager::~NetworkManager() {
 
 }
