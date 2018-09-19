@@ -15,7 +15,7 @@ public:
 	void sendToClient(SOCKET socket_d, char * messageOut);
 	void recvFromClient(SOCKET socket_d, char * messageIn);
 
-	// ShipNetData contain data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
+	// ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
 	inline struct ShipNetData { int posx, posy, direction; /* to discuss what we exactly need */ };
 	inline union ShipSendData { ShipNetData s_data; char* buffer[sizeof(ShipNetData)]; };
 
