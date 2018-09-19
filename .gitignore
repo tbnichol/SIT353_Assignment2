@@ -3,3 +3,4 @@
 # ignore build folder. keep everything else
 
 \PilotV2\build\
+\PilotV2\.vs
