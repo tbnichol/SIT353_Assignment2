@@ -37,12 +37,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\NetworkManager.h">
+<<<<<<< HEAD
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Client.h">
+=======
+>>>>>>> 802a26bcf7c69156cb8730e49d60e60de00d3976
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -69,9 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\NetworkManager.cpp">
+<<<<<<< HEAD
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Client.cpp">
+=======
+>>>>>>> 802a26bcf7c69156cb8730e49d60e60de00d3976
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
