@@ -14,6 +14,14 @@
 
 #include <sstream>
 
+
+
+
+
+// Base game main 
+/* TO DO: This will be determining if user is a client or a server 
+before deploying relevant quieries and functions..
+*/
 int main(int argc, char * argv [])
 {
 	QuickDraw window;

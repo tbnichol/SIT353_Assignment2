@@ -88,12 +88,10 @@ bool Ship::update (Model & model, double deltat)
 	{
 		doAI (model, controlthrust, controlleft, controlright, controlfire);
 	}	
-	if (mode == NETPLAYER) // other user controlled.
+	if (mode == NETPLAYER) // other client controlled.
 	{
 		// TO DO: quiery network manager for ID's relative updates
 	}
-	// may be another mode here that controls nodes from information
-	// received over the network?
 
 	accx += controlthrust * thrust * -sin (direction); 
 	accy += controlthrust * thrust * cos (direction); 
