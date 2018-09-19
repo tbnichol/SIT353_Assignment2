@@ -1,0 +1,5 @@
+# SIT353 gitignore
+
+# ignore build folder. keep everything else
+
+\PilotV2\build\
