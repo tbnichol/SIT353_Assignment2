@@ -162,7 +162,6 @@
     <ClInclude Include="Code\Room.h" />
     <ClInclude Include="Code\Ship.h" />
     <ClInclude Include="Code\Timer.h" />
-    <ClInclude Include="NetworkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Actor.cpp" />
@@ -173,7 +172,6 @@
     <ClCompile Include="Code\Room.cpp" />
     <ClCompile Include="Code\Ship.cpp" />
     <ClCompile Include="Code\Timer.cpp" />
-    <ClCompile Include="NetworkManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
