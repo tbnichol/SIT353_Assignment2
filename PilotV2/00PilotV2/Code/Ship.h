@@ -36,7 +36,7 @@ private:
 	bool thruston;
 
 public:
-	enum ActorTypes { INPLAY, AUTO, RECOVERY };
+	enum ActorTypes { INPLAY, AUTO, NETPLAYER, RECOVERY };
 
 	Ship (Controller & cntrller, int initmode, std::string name);
 	virtual ~Ship(void);
