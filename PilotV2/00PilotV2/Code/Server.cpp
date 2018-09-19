@@ -1,0 +1,37 @@
+#include "Server.h"
+
+Server::Server()
+{
+	// Messy process with windows networking - "start" the networking API.
+	WSADATA wsaData; // Stores win socket init info
+	result = WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+	// Stores address info (for socket listening /connection)
+	struct addrinfo *addr_result = NULL, addr_info;	
+	ZeroMemory(&addr_info, sizeof(addr_info));	// Sets size
+	addr_info.ai_family = AF_INET;				// IPV4
+	addr_info.ai_socktype = SOCK_STREAM;		// TCP 
+	addr_info.ai_protocol = IPPROTO_TCP;		// TCP 
+	addr_info.ai_flags = AI_PASSIVE;
+
+	// address set to local machine
+	getaddrinfo(NULL, DEFAULT_PORT, &addr_info, &addr_result);
+
+	// Create a SOCKET for connecting to server
+	listen_socket_d = socket(addr_result->ai_family, addr_result->ai_socktype, addr_result->ai_protocol);
+
+	// disable bloacking
+	u_long iMode = 1;
+	ioctlsocket(listen_socket_d, FIONBIO, &iMode);
+
+	// bind
+	bind(listen_socket_d, addr_result->ai_addr, (int)addr_result->ai_addrlen);
+	// listen
+	result = listen(listen_socket_d, SOMAXCONN);
+
+	// Server address info no longer necessary
+	freeaddrinfo(addr_result);
+}
+
+// destructor
+Server::~Server() {}

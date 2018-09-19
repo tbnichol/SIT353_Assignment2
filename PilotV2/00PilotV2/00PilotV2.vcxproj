@@ -173,6 +173,7 @@
     <ClCompile Include="Code\Pilot.cpp" />
     <ClCompile Include="Code\QuickDraw.cpp" />
     <ClCompile Include="Code\Room.cpp" />
+    <ClCompile Include="Code\Server.cpp" />
     <ClCompile Include="Code\Ship.cpp" />
     <ClCompile Include="Code\Timer.cpp" />
   </ItemGroup>

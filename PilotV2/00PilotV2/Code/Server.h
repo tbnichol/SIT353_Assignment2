@@ -22,8 +22,8 @@ public:
 	~Server();
 
 	// Sockets
-	SOCKET listen_socket_d;		// listening
-	SOCKET connection_socket_d; // client connection
+	SOCKET listen_socket_d = INVALID_SOCKET;;		// listening
+	SOCKET connection_socket_d = INVALID_SOCKET;; // client connection
 
 	// For error checking
 	int result;
