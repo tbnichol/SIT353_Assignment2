@@ -1,4 +1,3 @@
-//#include "stdafx.h" // Probably not necessary
 #include "NetworkManager.h"
 
 // send
@@ -31,5 +30,4 @@ void NetworkManager::sendToClient(/* To determine parameters later */) {
 
 void NetworkManager::recvFromClient(/* To determine parameters later */) {
 
->>>>>>> 802a26bcf7c69156cb8730e49d60e60de00d3976
 }
