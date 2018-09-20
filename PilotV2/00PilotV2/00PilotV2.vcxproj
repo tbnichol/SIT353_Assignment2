@@ -22,7 +22,7 @@
     <ProjectGuid>{20A44F92-6A38-44A3-804C-303C8056ADF8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My00PilotV2</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -157,6 +157,8 @@
     <ClInclude Include="Code\Actor.h" />
     <ClInclude Include="Code\Bullet.h" />
     <ClInclude Include="Code\Client.h" />
+    <ClInclude Include="Code\GameClientSide.h" />
+    <ClInclude Include="Code\GameServerSide.h" />
     <ClInclude Include="Code\Model.h" />
     <ClInclude Include="Code\NetworkManager.h" />
     <ClInclude Include="Code\QuickDraw.h" />
@@ -169,6 +171,8 @@
     <ClCompile Include="Code\Actor.cpp" />
     <ClCompile Include="Code\Bullet.cpp" />
     <ClCompile Include="Code\Client.cpp" />
+    <ClCompile Include="Code\GameClientSide.cpp" />
+    <ClCompile Include="Code\GameServerSide.cpp" />
     <ClCompile Include="Code\NetworkManager.cpp" />
     <ClCompile Include="Code\Pilot.cpp" />
     <ClCompile Include="Code\QuickDraw.cpp" />

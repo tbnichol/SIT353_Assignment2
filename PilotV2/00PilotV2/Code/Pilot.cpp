@@ -8,20 +8,41 @@
 
 #include "QuickDraw.h"
 #include "Timer.h"
-
 #include "Room.h"
 #include "Ship.h"
+#include "GameServerSide.h"
+//#include "GameClientSide.h"
 
 #include <sstream>
+#include <process.h>
 
+// Game Clinet/Server obj pointers
+/*GameServerSide * server;
+GameClientSide * client;
 
-
-
+// Function for server loop execution
+void runClient()			// clinet
+{
+	while (true)
+	{
+		// TO DO: incorperate pilot game stuff in here... *******
+		//will later run client->UpdateGame();
+	}
+}
+// Function for server loop execution
+void runServer(void *)		
+{
+	while (true)
+	{
+		server->UpdateGame();
+	}
+}*/
 
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
 before deploying relevant quieries and functions..
 */
+//*
 int main(int argc, char * argv [])
 {
 	QuickDraw window;
@@ -79,4 +100,20 @@ int main(int argc, char * argv [])
 
 	return 0;
 }
+//*/
 
+
+// Test main (temp)
+/*
+int main()
+{
+	// initialize client/server
+	server = new GameServerSide();
+	client = new GameClientSide();
+
+	// server thread // look into this *********************
+	_beginthread(runServer, 0, (void*)12);
+
+	runClient();
+}
+*/
