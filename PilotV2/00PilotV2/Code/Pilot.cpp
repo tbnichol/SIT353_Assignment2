@@ -8,20 +8,42 @@
 
 #include "QuickDraw.h"
 #include "Timer.h"
-
 #include "Room.h"
 #include "Ship.h"
+#include "GameServerSide.h" // this include is causing the errors (I think)
+#include "GameClientSide.h" // " " same as above
 
 #include <sstream>
+#include <process.h>
 
+// client/server objs
+GameClientSide * client;
+GameServerSide * server;
 
-
+// function to run client loop
+void runClient()
+{
+	while (true)
+	{
+		// TO DO: fill with pilot game things... ******
+		// eventually to run client->UpdateGame();  ***
+	}
+}
+// function to run server loop
+void runServer(void *)
+{
+	while (true)
+	{
+		server->UpdateGame();
+	}
+}
 
 
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
 before deploying relevant quieries and functions..
 */
+/*
 int main(int argc, char * argv [])
 {
 	QuickDraw window;
@@ -79,4 +101,19 @@ int main(int argc, char * argv [])
 
 	return 0;
 }
+*/
 
+
+// Temp main for testing server/client connection
+int main()
+{
+	// initialize client/server
+	client = new GameClientSide();
+	server = new GameServerSide();
+
+	// server thread // look into this *****
+	_beginthread(runServer, 0, (void*)12);
+
+	// run client loop	
+	runClient();
+}
