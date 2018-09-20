@@ -1,15 +1,5 @@
 #include "NetworkManager.h"
-
-// send
-int NetworkUtility::sendData(SOCKET c_Socket, char * message, int messageSize)
-{
-	return send(c_Socket, message, messageSize, 0);
-}
-// receive
-int NetworkUtility::recvData(SOCKET c_Socket, char * buffer, int bufferSize)
-{
-	return recv(c_Socket, buffer, bufferSize, 0);
-}
+#include <iostream> // Used for Debug
 
 NetworkManager::NetworkManager() {
 
@@ -24,10 +14,14 @@ NetworkManager::~NetworkManager() {
 
 }
 
-void NetworkManager::sendToClient(/* To determine parameters later */) {
-	
+void NetworkManager::sendToClient(SOCKET socket_d, char * messageOut) {
+	if (send(socket_d, messageOut, sizeof(messageOut), 0) == SOCKET_ERROR) {
+		std::cout << "Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+	}
 }
 
-void NetworkManager::recvFromClient(/* To determine parameters later */) {
-
+void NetworkManager::recvFromClient(SOCKET socket_d, char * messageIn) {
+	if (recv(socket_d, messageIn, sizeof(messageIn), 0) == SOCKET_ERROR) {
+		std::cout << "Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+	}
 }
