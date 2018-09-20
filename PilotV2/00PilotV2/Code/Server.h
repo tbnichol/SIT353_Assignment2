@@ -18,6 +18,7 @@ using namespace std;
 class Server
 {
 public:
+	// Initialise
 	Server();
 	~Server();
 
@@ -30,4 +31,8 @@ public:
 
 	// table to store client sockets
 	std::map<unsigned int, SOCKET> clients_map;
+
+
+	// Accepts client connections
+	bool addClient(unsigned int & clientID);
 };

@@ -35,3 +35,26 @@ Server::Server()
 
 // destructor
 Server::~Server() {}
+
+// Accepts client connections
+bool Server::addClient(unsigned int & clientID)
+{
+	connection_socket_d = accept(listen_socket_d, NULL, NULL); // accept
+
+	// Failed connection
+	if (connection_socket_d == 0 || connection_socket_d == INVALID_SOCKET)
+	{
+		return false;
+	}
+	// Successful connection
+	else
+	{
+		// disable nagle algorithm (can cause latency issues)
+		char value = 1;
+		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
+
+		// Add new connection to table of client sockets
+		clients_map.insert(pair<unsigned int, SOCKET>(clientID, connection_socket_d));
+		return true;
+	}
+}
