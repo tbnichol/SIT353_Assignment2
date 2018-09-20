@@ -1,7 +1,7 @@
 #include "GameServerSide.h"
-//#include <iostream>
+#include <iostream>
 
-//using namespace std;
+using namespace std;
 
 unsigned int GameServerSide::clientID;
 

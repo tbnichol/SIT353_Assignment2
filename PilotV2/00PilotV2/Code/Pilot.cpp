@@ -8,12 +8,15 @@
 
 #include "QuickDraw.h"
 #include "Timer.h"
+
 #include "Room.h"
 #include "Ship.h"
-//#include "GameServerSide.h" // this include is causing the errors (I think)
-//#include "GameClientSide.h" // " " same as above
 
 #include <sstream>
+
+#include "GameServerSide.h"
+#include "GameClientSide.h"
+
 #include <process.h>
 
 /*// client/server obj pointers
