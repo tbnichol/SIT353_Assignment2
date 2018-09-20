@@ -8,4 +8,7 @@ GameClientSide::GameClientSide()
 }
 
 // destructor
-GameClientSide::~GameClientSide() {}
+GameClientSide::~GameClientSide() 
+{
+	delete client;
+}

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __RATS_BULLET
 #define __RATS_BULLET
 

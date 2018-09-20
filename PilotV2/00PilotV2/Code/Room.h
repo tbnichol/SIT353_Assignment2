@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __PILOT_ROOM
 #define __PILOT_ROOM
 

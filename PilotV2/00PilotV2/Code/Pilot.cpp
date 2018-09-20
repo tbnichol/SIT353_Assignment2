@@ -10,13 +10,13 @@
 #include "Timer.h"
 #include "Room.h"
 #include "Ship.h"
-#include "GameServerSide.h" // this include is causing the errors (I think)
-#include "GameClientSide.h" // " " same as above
+//#include "GameServerSide.h" // this include is causing the errors (I think)
+//#include "GameClientSide.h" // " " same as above
 
 #include <sstream>
 #include <process.h>
 
-// client/server obj pointers
+/*// client/server obj pointers
 GameClientSide * client;
 GameServerSide * server;
 
@@ -41,7 +41,7 @@ void runServer(void *)
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
 before deploying relevant quieries and functions..*/
-/*
+
 int main(int argc, char * argv [])
 {
 	QuickDraw window;
@@ -99,7 +99,7 @@ int main(int argc, char * argv [])
 
 	return 0;
 }
-*/
+/*
 
 
 // Temp main for testing server/client connection
@@ -110,10 +110,10 @@ int main()
 	server = new GameServerSide();
 
 	// server thread // look into this *****
-	_beginthread(runServer, 0, (void*)12);
+	//_beginthread(runServer, 0, (void*)12);
 
 	// run client loop	
-	runClient();
+	//runClient();
 }
-
+*/
 

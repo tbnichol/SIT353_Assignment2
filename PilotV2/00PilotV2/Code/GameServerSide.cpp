@@ -15,7 +15,10 @@ GameServerSide::GameServerSide()
 }
 
 // Destructor
-GameServerSide::~GameServerSide(){}
+GameServerSide::~GameServerSide()
+{
+	delete server;
+}
 
 void GameServerSide::UpdateGame()
 {

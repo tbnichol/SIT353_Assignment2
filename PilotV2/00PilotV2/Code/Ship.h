@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __PILOT_SHIP
 #define __PILOT_SHIP
 

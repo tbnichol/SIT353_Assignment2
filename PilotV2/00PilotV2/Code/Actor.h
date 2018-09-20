@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __RATS_ACTOR
 #define __RATS_ACTOR
 

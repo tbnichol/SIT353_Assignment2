@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ___Included_Timer
 
 #define ___Included_Timer
