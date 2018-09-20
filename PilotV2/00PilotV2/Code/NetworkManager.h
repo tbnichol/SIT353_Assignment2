@@ -4,6 +4,12 @@
 #include <Windows.h>
 #include <thread>
 #include <vector>
+#include <iostream> // 
+#include <ws2tcpip.h> // 
+#include <map> //
+
+using namespace std; // 
+
 
 class NetworkManager {
 public:

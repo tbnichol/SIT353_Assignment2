@@ -1,7 +1,7 @@
 #include "Client.h"
-#include <iostream>
+//#include <iostream>
 
-using namespace std;
+//using namespace std;
 
 // constructor
 Client::Client() 
@@ -11,19 +11,17 @@ Client::Client()
 	result = WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	// Stores address info (for socket connection)
-	// TO DO: Discuss ai vs sin and what we want to use...
-	// **********************************************************
 	struct addrinfo *addr_result = NULL, *sock = NULL, addr_info;
-	ZeroMemory(&addr_info, sizeof(addr_info));
-	addr_info.ai_family = AF_UNSPEC;		// IPV4 or IPV6
-	addr_info.ai_socktype = SOCK_STREAM;	// TCP
-	addr_info.ai_protocol = IPPROTO_TCP;	// TCP		
-	// **********************************************************
+	ZeroMemory(&addr_info, sizeof(addr_info));	// Sets size
+	addr_info.ai_family = AF_INET;				// IPV4
+	addr_info.ai_socktype = SOCK_STREAM;		// TCP
+	addr_info.ai_protocol = IPPROTO_TCP;		// TCP	
 									  
 	//resolve server address and port
 	// TO DO: potentially change this as it is currently set to localhost
 	// *******************************************************************
 	getaddrinfo("127.0.0.1", DEFAULT_PORT, &addr_info, &addr_result);
+	// inet_pton(AF_INET, server_IP, &(server_addr.sin_addr.s_addr)); ***
 	// *******************************************************************
 
 	// Attempt connection

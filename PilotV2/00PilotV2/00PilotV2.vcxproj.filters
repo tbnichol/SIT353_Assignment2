@@ -1,84 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Code\Actor.cpp" />
+    <ClCompile Include="Code\Bullet.cpp" />
+    <ClCompile Include="Code\Client.cpp" />
+    <ClCompile Include="Code\NetworkManager.cpp" />
+    <ClCompile Include="Code\Pilot.cpp" />
+    <ClCompile Include="Code\QuickDraw.cpp" />
+    <ClCompile Include="Code\Room.cpp" />
+    <ClCompile Include="Code\Ship.cpp" />
+    <ClCompile Include="Code\Timer.cpp" />
+    <ClCompile Include="Code\Server.cpp" />
+    <ClCompile Include="Code\GameServerSide.cpp" />
+    <ClCompile Include="Code\GameClientSide.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\QuickDraw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Room.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Ship.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\NetworkManager.h">
-<<<<<<< HEAD
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Client.h">
-=======
->>>>>>> 802a26bcf7c69156cb8730e49d60e60de00d3976
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Code\Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Pilot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\QuickDraw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Room.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Ship.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\NetworkManager.cpp">
-<<<<<<< HEAD
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Client.cpp">
-=======
->>>>>>> 802a26bcf7c69156cb8730e49d60e60de00d3976
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Code\Actor.h" />
+    <ClInclude Include="Code\Bullet.h" />
+    <ClInclude Include="Code\Client.h" />
+    <ClInclude Include="Code\Model.h" />
+    <ClInclude Include="Code\NetworkManager.h" />
+    <ClInclude Include="Code\QuickDraw.h" />
+    <ClInclude Include="Code\Room.h" />
+    <ClInclude Include="Code\Server.h" />
+    <ClInclude Include="Code\Ship.h" />
+    <ClInclude Include="Code\Timer.h" />
+    <ClInclude Include="Code\GameServerSide.h" />
+    <ClInclude Include="Code\GameClientSide.h" />
   </ItemGroup>
 </Project>
