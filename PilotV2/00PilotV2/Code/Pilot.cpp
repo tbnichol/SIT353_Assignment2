@@ -16,21 +16,21 @@
 #include <sstream>
 #include <process.h>
 
-// client/server objs
+// client/server obj pointers
 GameClientSide * client;
 GameServerSide * server;
 
-// function to run client loop
+// function to run client loop execution
 void runClient()
 {
 	while (true)
 	{
-		// TO DO: fill with pilot game things... ******
+		//incorperate pilot game stuff in here... *****
 		// eventually to run client->UpdateGame();  ***
 	}
 }
-// function to run server loop
-void runServer(void *)
+// function to run server loop execution
+void runServer(void *)	
 {
 	while (true)
 	{
@@ -38,11 +38,9 @@ void runServer(void *)
 	}
 }
 
-
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
-before deploying relevant quieries and functions..
-*/
+before deploying relevant quieries and functions..*/
 /*
 int main(int argc, char * argv [])
 {
@@ -117,3 +115,5 @@ int main()
 	// run client loop	
 	runClient();
 }
+
+
