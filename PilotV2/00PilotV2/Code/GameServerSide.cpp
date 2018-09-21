@@ -25,6 +25,5 @@ void GameServerSide::UpdateGame()
 		std::cout << "A new client (" << clientID << ") has established a connection! " << std::endl;
 		clientID++; // iterate
 	}
-
 	// TO DO: Add in gane environment updates **************
 }

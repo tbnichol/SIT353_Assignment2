@@ -5,34 +5,25 @@
 // This code has been modified to improve the keyboard handling, allowing 
 // multiple keys to be proceesed at once (ie., FIRE & THRUST)
 
-#define WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN // Prevents windows.h from importing winsock.h project wide.
 
 #include "QuickDraw.h"
 #include "Timer.h"
 #include "Room.h"
 #include "Ship.h"
-#include "GameServerSide.h" // this include is causing the errors (I think)
-#include "GameClientSide.h" // " " same as above
+#include "GameServerSide.h"
+#include "GameClientSide.h"
 
-#include "NetworkManager.h"
 #include <sstream>
-#include <process.h>
+#include <process.h> // TODO: discuss our multithreading plan
+#include <thread> // TODO: discuss our multithreading plan
 
 // client/server obj pointers
 GameClientSide * client;
 GameServerSide * server;
 
-// function to run client loop execution
-void runClient()
-{
-	while (true)
-	{
-		//incorperate pilot game stuff in here... *****
-		// eventually to run client->UpdateGame();  ***
-	}
-}
 // function to run server loop execution
-void runServer(void *)	
+void runServer(void *) // TODO: Move to GameServerSide or Server objects
 {
 	while (true)
 	{
@@ -43,7 +34,7 @@ void runServer(void *)
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
 before deploying relevant quieries and functions..*/
-/*
+
 int main(int argc, char * argv [])
 {
 	QuickDraw window;
@@ -70,6 +61,21 @@ int main(int argc, char * argv [])
 	double avgdeltat = 0.0;
 
 	double scale = 1.0;
+
+	if (argc == 1) {
+		client = new GameClientSide(argv[1], *ship);
+		// run client loop	
+		//_beginthread(runClient, 0, (void*)12, &ship);
+		// TO DO: Discuss the use of modern C++11 standard threads, instead of C++98 processes
+	}
+	else {
+		// initialize client/server
+		server = new GameServerSide();
+
+
+		// server thread // look into this *****
+		_beginthread(runServer, 0, (void*)12);
+	}
 
 	while (true)
 	{
@@ -99,21 +105,7 @@ int main(int argc, char * argv [])
 		view.swapBuffer ();
 	}
 
+	delete client;
+	delete server;
 	return 0;
 }
-*/
-
-// Temp main for testing server/client connection
-int main()
-{
-	// initialize client/server
-	server = new GameServerSide();
-	client = new GameClientSide();
-
-	// server thread // look into this *****
-	_beginthread(runServer, 0, (void*)12);
-
-	// run client loop	
-	runClient();
-}
-

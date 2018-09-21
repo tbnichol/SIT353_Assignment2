@@ -1,8 +1,7 @@
 #include "Client.h"
-#include <iostream>
 
 // constructor
-Client::Client() 
+Client::Client(char* address, Ship& ship) : player_ship(&ship)
 {
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
@@ -18,7 +17,7 @@ Client::Client()
 	//resolve server address and port
 	// TO DO: potentially change this as it is currently set to localhost
 	// *******************************************************************
-	getaddrinfo("127.0.0.1", DEFAULT_PORT, &addr_info, &addr_result);
+	getaddrinfo(address, DEFAULT_PORT, &addr_info, &addr_result);
 	// inet_pton(AF_INET, server_IP, &(server_addr.sin_addr.s_addr)); ***
 	// *******************************************************************
 
@@ -30,9 +29,9 @@ Client::Client()
 
 		// Connect
 		// try connecting to server
-		if (connect(socket_d, sock->ai_addr, (int)sock->ai_addrlen) == 0) // sizeof(server_addr) ***** use this for length retrieval?
+		if (connect(socket_d, sock->ai_addr, (int)sock->ai_addrlen) != 0) // sizeof(server_addr) ***** use this for length retrieval?
 		{
-			std::cout << "Server connection successful...." << std::endl;
+			std::cout << "Server connection failed...." << std::endl;
 			break;
 		}
 	}
@@ -54,7 +53,21 @@ Client::Client()
 	// disable nagle algorithm (can cause latency issues)
 	char value = 1;
 	setsockopt(socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
+
+	networkThread = new std::thread(&Client::Update, this);
 }
 
 // destructor
 Client::~Client() {}
+
+void Client::Update() {
+	while (true)
+	{
+		ShipNetData i;
+		player_ship->getPosition(i.posx, i.posy);
+		ShipSendData j;
+		j.s_data = i;
+		NetworkManager::sendToClient(socket_d, *j.buffer);
+
+	}
+}

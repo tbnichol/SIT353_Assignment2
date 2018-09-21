@@ -4,9 +4,11 @@
 class GameClientSide
 {
 public:
-	GameClientSide();
+	GameClientSide(char* server, Ship& possess);
 	~GameClientSide();
 
 	// client obj
 	Client* client;
+
+	char* address;
 };
