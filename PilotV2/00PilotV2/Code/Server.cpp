@@ -55,21 +55,23 @@ bool Server::addClient(unsigned int & clientID)
 
 		// Add new connection to table of client sockets - TO DEPRICATE
 		//clients_map.insert(std::pair<unsigned int, SOCKET>(clientID, connection_socket_d));
-		Player i;
-		i.p_socket = connection_socket_d;
-		i.p_name = "Test Player";
+		/*Player * i; FIX THIS SHIT AS WELL
+		i->p_socket = connection_socket_d;
+		i->p_name = "Test Player";
 		client_vec.push_back(i);
-		return true;
+		*/return true;
 	}
 }
 
 void Server::checkForClientUpdates()
 {
-	int result;
+	/*int result;
 	char * buffer;
 	ShipSendData i;
-	for (Player j : client_vec)
+	for (Player *j : client_vec)
 	{
-		NetworkManager::recvFromClient(j.p_socket, buffer);
-		strcpy(*i.buffer, buffer);
-	}
+		NetworkManager::recvFromClient(j->p_socket, buffer);
+		//strcpy_s(i.buffer[DEFAULT_BUFFER_LENGTH], buffer); FIX THIS SHIT AT SOME POINT
+		j->p_ship.setPosition(i.s_data.posx, i.s_data.posy);
+	}*/
+}
