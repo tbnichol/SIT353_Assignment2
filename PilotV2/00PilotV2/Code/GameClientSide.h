@@ -12,3 +12,4 @@ public:
 
 	char* address;
 };
+

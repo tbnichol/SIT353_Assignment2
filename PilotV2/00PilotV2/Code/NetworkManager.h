@@ -15,8 +15,32 @@ public:
 
 	NetworkManager(int a);
 
-	static void sendToClient(SOCKET socket_d, char * messageOut);
-	static void recvFromClient(SOCKET socket_d, char * messageIn);
+	static void sendMessage(SOCKET socket_d, char * messageOut);
+	static void recvMessage(SOCKET socket_d, char * messageIn);
 
 	enum ManagerType { SERVER, CLIENT };
+
+};
+
+
+// NetworkData.... **
+#define PACKET_MAXSIZE 1000000
+// Types of message packets that can be sent
+enum MessageType { CONNECT = 0,	ACTION = 1,};
+
+// to contain message data
+struct Message 
+{
+	// type
+	unsigned int message_type;
+
+	void serialize(char * data)
+	{
+		memcpy(data, this, sizeof(Message));
+	}
+
+	void deserialize(char * data) 
+	{
+		memcpy(this, data, sizeof(Message));
+	}
 };
