@@ -71,8 +71,6 @@ int main(int argc, char * argv [])
 	else {
 		// initialize client/server
 		server = new GameServerSide();
-
-
 		// server thread // look into this *****
 		_beginthread(runServer, 0, (void*)12);
 	}
