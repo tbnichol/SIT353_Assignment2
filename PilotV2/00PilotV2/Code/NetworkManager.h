@@ -1,16 +1,7 @@
 #pragma once
 
 #include <winsock2.h>
-//#include <windows.h>
-
-#include <thread>
-#include <vector>
-#include <iostream> // 
-#include <ws2tcpip.h> // 
-#include <map> //
-
-using namespace std; // 
-
+//#include <Windows.h>
 
 class NetworkManager {
 public:

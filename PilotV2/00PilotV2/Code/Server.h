@@ -1,12 +1,10 @@
-#pragma once
-#pragma comment (lib, "Ws2_32.lib")
-
 //#include <winsock2.h>
-//#include <ws2tcpip.h> //
 //#include <Windows.h>
-//#include <map> //
-
 #include "NetworkManager.h"
+#include <ws2tcpip.h>
+#include <map>
+using namespace std;
+#pragma comment (lib, "Ws2_32.lib")
 
 // defines
 #define DEFAULT_BUFFER_LENGTH 512		// Buffer

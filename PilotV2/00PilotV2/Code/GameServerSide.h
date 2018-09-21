@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 #include "Server.h" // Allows for utilisation of Server class functions and attributes
 
 class GameServerSide
