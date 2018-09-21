@@ -22,3 +22,45 @@ GameClientSide::~GameClientSide()
 	delete client;
 	delete address;
 }
+
+void GameClientSide::UpdateGame()
+{
+	// obj message
+	Message message;
+
+	// received no message
+	int buffer = client->recvMessages(messageData);
+	if (buffer <= 0)
+		return;
+
+	// iterater
+	int i = 0;
+
+	while (i < (unsigned int)buffer)
+	{
+		message.deserialize(&(messageData[i]));
+		i += sizeof(Message);
+
+		switch (message.message_type) 
+		{
+			case ACTION:
+				std::cout << "Received ACTION message from server" << std::endl;
+				sendACTION(); break;
+			default:
+				std::cout << "Error in MESSAGE types" << std::endl;	break;
+		}
+	}
+}
+
+void GameClientSide::sendACTION()
+{
+	// send action packet
+	char messageData[sizeof(Message)];
+
+	Message message;
+	message.message_type = ACTION;
+
+	message.serialize(messageData);
+
+	NetworkManager::sendMessage(client->socket_d, messageData);
+}

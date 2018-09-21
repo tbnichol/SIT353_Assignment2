@@ -23,6 +23,7 @@ public:
 	~Client();		// destructor
 
 	void Update();
+	int recvMessages(char * buffer);
 	
 	// Connection socket 
 	SOCKET socket_d = INVALID_SOCKET; // initialise to invalid (temp)

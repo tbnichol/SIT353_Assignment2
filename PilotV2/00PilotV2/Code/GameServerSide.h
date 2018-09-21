@@ -19,6 +19,7 @@ public:
 	void UpdateGame();
 
 	void recv_FromClient();
+	void sendACTION();
 
 	// TO DO: include all game stuff eventually.... *****
 };

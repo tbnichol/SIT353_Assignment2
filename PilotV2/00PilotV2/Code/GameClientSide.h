@@ -10,6 +10,10 @@ public:
 	// client obj
 	Client* client;
 
+	void sendACTION();
+	void UpdateGame();
+
 	char* address;
+	char messageData[DEFAULT_BUFFER_LENGTH];
 };
 

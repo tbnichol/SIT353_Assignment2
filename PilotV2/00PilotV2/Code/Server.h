@@ -19,7 +19,7 @@ struct Player {
 	Ship& p_ship;
 };
 
-class Server
+class Server : NetworkManager
 {
 public:
 	// Initialise
@@ -43,5 +43,5 @@ public:
 	void castClientChanges();
 
 	// receive
-	int recvMessage(unsigned int clientID, char * buffer);
+	int recvMessage(unsigned int clientID, char * buffer);	
 };

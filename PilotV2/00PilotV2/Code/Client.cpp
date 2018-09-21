@@ -70,3 +70,19 @@ void Client::Update() {
 		NetworkManager::sendMessage(socket_d, *j.buffer);
 	}
 }
+
+int Client::recvMessages(char * buffer)
+{
+	result = NetworkManager::recvMessage(socket_d, buffer);
+
+	// successful
+	if (result != 0)
+		return result;
+	// unseccessful
+	else
+	{
+		std::cout << "Connection closed" << std::endl;
+		closesocket(socket_d);
+		WSACleanup();
+	}	
+}

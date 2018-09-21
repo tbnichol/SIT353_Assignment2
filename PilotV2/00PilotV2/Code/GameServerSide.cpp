@@ -59,16 +59,28 @@ void GameServerSide::recv_FromClient()
 				// add more in here eventually... ***************
 				switch (message.message_type)
 				{
-				case CONNECT:
-					std::cout << "Server received CONNECT message from client" << std::endl; break;
-
 				case ACTION:
-					std::cout << "Server received ACTION message from client" << std::endl; break;
-
+					std::cout << "Server received ACTION message from client" << std::endl;
+					sendACTION(); break;
+				case CONNECT:
+					std::cout << "Server received CONNECT message from client" << std::endl; 
+					sendACTION(); break;
 				default:
 					std::cout << "Error in MESSAGE types" << std::endl; break;
 				}
 			}
 		}
 	}
+}
+
+void GameServerSide::sendACTION()
+{
+	// Message obj
+	Message message;
+	message.message_type = ACTION;
+	
+	char messageData[sizeof(Message)];
+	message.serialize(messageData);
+
+	server->sendAll(messageData);
 }

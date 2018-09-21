@@ -18,12 +18,19 @@
 #include <process.h> // TODO: discuss our multithreading plan
 #include <thread> // TODO: discuss our multithreading plan
 
-// client/server obj pointers
+// client // function to run client loop execution
 GameClientSide * client;
-GameServerSide * server;
+void runClient()			// TODO: Move to GameClientSide or Client objects
+{
+	while (true)
+	{
+		client->UpdateGame();
+	}
+}
 
-// function to run server loop execution
-void runServer(void *) // TODO: Move to GameServerSide or Server objects
+// server // function to run server loop execution
+GameServerSide * server;
+void runServer(void *)		// TODO: Move to GameServerSide or Server objects
 {
 	while (true)
 	{
