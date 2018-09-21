@@ -80,19 +80,25 @@ void Server::checkForClientUpdates()
 }
 
 // receive
-/*
 int Server::recvMessage(unsigned int clientID, char * buffer)
 {
+	// if client ID was found
 	if (clients_map.find(clientID) != clients_map.end())
 	{
+		// make client ID current socket
 		SOCKET socket_d = clients_map[clientID];
+
+		// receive message
 		result = NetworkManager::recvMessage(socket_d, buffer);
-		if (iResult == 0)
+		// if needed, close connection to this client
+		if (result == 0)
 		{
-			printf("Connection closed\n");
-			closesocket(currentSocket);
+			std::cout << "Connection closed" << std::endl;
+			closesocket(socket_d);
 		}
-		return iResult;
+		return result;
 	}
-	return 0;
-}*/
+	// client not found in map
+	else
+		return 0;
+}

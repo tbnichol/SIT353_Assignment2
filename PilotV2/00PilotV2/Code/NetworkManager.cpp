@@ -13,14 +13,31 @@ NetworkManager::~NetworkManager() {
 
 }
 
-void NetworkManager::sendMessage(SOCKET socket_d, char * messageOut) {
-	if (send(socket_d, messageOut, sizeof(messageOut), 0) == SOCKET_ERROR) {
+// send
+int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut) 
+{
+	// try send
+	int result = send(socket_d, messageOut, sizeof(messageOut), 0);
+	
+	// succesful
+	if (result != SOCKET_ERROR) 
+		return result;
+	// unsuccessful
+	else
 		std::cout << "Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
-	}
+		
 }
 
-void NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) {
-	if (recv(socket_d, messageIn, sizeof(messageIn), 0) == SOCKET_ERROR) {
+// recv
+int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) 
+{
+	// try receive
+	int result = recv(socket_d, messageIn, sizeof(messageIn), 0);
+	
+	// succesful
+	if (result != SOCKET_ERROR) 
+		return result;
+	// unsuccessful
+	else
 		std::cout << "Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
-	}
 }

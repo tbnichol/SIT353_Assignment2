@@ -43,5 +43,5 @@ public:
 	void castClientChanges();
 
 	// receive
-	//int recvMessage(unsigned int clientID, char * buffer);
+	int recvMessage(unsigned int clientID, char * buffer);
 };

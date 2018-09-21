@@ -15,8 +15,8 @@ public:
 
 	NetworkManager(int a);
 
-	static void sendMessage(SOCKET socket_d, char * messageOut);
-	static void recvMessage(SOCKET socket_d, char * messageIn);
+	static int sendMessage(SOCKET socket_d, char * messageOut);
+	static int recvMessage(SOCKET socket_d, char * messageIn);
 
 	enum ManagerType { SERVER, CLIENT };
 

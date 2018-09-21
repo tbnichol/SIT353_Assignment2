@@ -67,7 +67,6 @@ void Client::Update() {
 		player_ship->getPosition(i.posx, i.posy);
 		ShipSendData j;
 		j.s_data = i;
-		NetworkManager::sendToClient(socket_d, *j.buffer);
-
+		NetworkManager::sendMessage(socket_d, *j.buffer);
 	}
 }
