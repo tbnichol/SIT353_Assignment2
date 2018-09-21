@@ -35,7 +35,7 @@ public:
 
 	// table to store client sockets
 	std::map<unsigned int, SOCKET> clients_map;
-	std::vector<Player> client_vec;
+	std::vector<Player*> client_vec;
 
 	// Accepts client connections
 	bool addClient(unsigned int & clientID);
