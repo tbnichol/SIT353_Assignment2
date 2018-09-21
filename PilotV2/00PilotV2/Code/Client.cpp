@@ -1,8 +1,6 @@
 #include "Client.h"
 #include <iostream>
 
-using namespace std;
-
 // constructor
 Client::Client() 
 {
@@ -32,17 +30,17 @@ Client::Client()
 
 		// Connect
 		// try connecting to server
-		if (connect(socket_d, sock->ai_addr, (int)sock->ai_addrlen) != 0) // sizeof(server_addr) ***** use this for length retrieval?
+		if (connect(socket_d, sock->ai_addr, (int)sock->ai_addrlen) == 0) // sizeof(server_addr) ***** use this for length retrieval?
 		{
-			cout << "Server connection failed...." << endl;
-			return;
+			std::cout << "Server connection successful...." << std::endl;
+			break;
 		}
 	}
 
 	// failed connection
 	if (socket_d == INVALID_SOCKET)
 	{
-		cout << "Server connection failed..." << endl;
+		std::cout << "Server connection failed..." << std::endl;
 		return;
 	}
 

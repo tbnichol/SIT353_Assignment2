@@ -1,7 +1,4 @@
 #include "GameServerSide.h"
-#include <iostream>
-
-using namespace std;
 
 unsigned int GameServerSide::clientID;
 
@@ -25,7 +22,7 @@ void GameServerSide::UpdateGame()
 	// Notification of new client connection being established
 	if (server->addClient(clientID))
 	{
-		cout << "A new client (" << clientID << ") has established a connection! " << endl;
+		std::cout << "A new client (" << clientID << ") has established a connection! " << std::endl;
 		clientID++; // iterate
 	}
 

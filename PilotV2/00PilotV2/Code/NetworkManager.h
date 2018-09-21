@@ -1,7 +1,8 @@
 #pragma once
 
 #include <winsock2.h>
-//#include <Windows.h>
+#include <Windows.h>
+#include <iostream> // Used for Debug
 
 class NetworkManager {
 public:
@@ -14,8 +15,8 @@ public:
 	void recvFromClient(SOCKET socket_d, char * messageIn);
 
 	// ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
-	inline struct ShipNetData { int posx, posy, direction; /* to discuss what we exactly need */ };
-	inline union ShipSendData { ShipNetData s_data; char* buffer[sizeof(ShipNetData)]; };
+	struct ShipNetData { int posx, posy, direction; /* to discuss what we exactly need */ };
+	union ShipSendData { ShipNetData s_data; char* buffer[sizeof(ShipNetData)]; };
 
 	enum ManagerType { SERVER, CLIENT };
 };

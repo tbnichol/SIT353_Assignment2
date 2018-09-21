@@ -1,5 +1,4 @@
 #include "NetworkManager.h"
-#include <iostream> // Used for Debug
 
 NetworkManager::NetworkManager() {
 

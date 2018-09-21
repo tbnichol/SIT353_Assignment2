@@ -54,7 +54,7 @@ bool Server::addClient(unsigned int & clientID)
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
 		// Add new connection to table of client sockets
-		clients_map.insert(pair<unsigned int, SOCKET>(clientID, connection_socket_d));
+		clients_map.insert(std::pair<unsigned int, SOCKET>(clientID, connection_socket_d));
 		return true;
 	}
 }

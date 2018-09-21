@@ -1,7 +1,5 @@
-//#include <winsock2.h>
-//#include <Windows.h>
+#pragma once
 #include "Client.h" // Allows for utilisation of Client class functions and attributes
-
 
 class GameClientSide
 {
