@@ -5,18 +5,20 @@
 // This code has been modified to improve the keyboard handling, allowing 
 // multiple keys to be proceesed at once (ie., FIRE & THRUST)
 
+#define WIN32_LEAN_AND_MEAN
 
 #include "QuickDraw.h"
 #include "Timer.h"
 #include "Room.h"
 #include "Ship.h"
-//#include "GameServerSide.h" // this include is causing the errors (I think)
-//#include "GameClientSide.h" // " " same as above
+#include "GameServerSide.h" // this include is causing the errors (I think)
+#include "GameClientSide.h" // " " same as above
 
+#include "NetworkManager.h"
 #include <sstream>
 #include <process.h>
 
-/*// client/server obj pointers
+// client/server obj pointers
 GameClientSide * client;
 GameServerSide * server;
 
@@ -41,7 +43,7 @@ void runServer(void *)
 // Base game main 
 /* TO DO: This will be determining if user is a client or a server 
 before deploying relevant quieries and functions..*/
-
+/*
 int main(int argc, char * argv [])
 {
 	QuickDraw window;
@@ -99,21 +101,19 @@ int main(int argc, char * argv [])
 
 	return 0;
 }
-/*
-
+*/
 
 // Temp main for testing server/client connection
 int main()
 {
 	// initialize client/server
-	client = new GameClientSide();
 	server = new GameServerSide();
+	client = new GameClientSide();
 
 	// server thread // look into this *****
-	//_beginthread(runServer, 0, (void*)12);
+	_beginthread(runServer, 0, (void*)12);
 
 	// run client loop	
-	//runClient();
+	runClient();
 }
-*/
 
