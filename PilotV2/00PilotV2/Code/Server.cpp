@@ -53,8 +53,23 @@ bool Server::addClient(unsigned int & clientID)
 		char value = 1;
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
-		// Add new connection to table of client sockets
-		clients_map.insert(std::pair<unsigned int, SOCKET>(clientID, connection_socket_d));
+		// Add new connection to table of client sockets - TO DEPRICATE
+		//clients_map.insert(std::pair<unsigned int, SOCKET>(clientID, connection_socket_d));
+		Player i;
+		i.p_socket = connection_socket_d;
+		i.p_name = "Test Player";
+		client_vec.push_back(i);
 		return true;
 	}
 }
+
+void Server::checkForClientUpdates()
+{
+	int result;
+	char * buffer;
+	ShipSendData i;
+	for (Player j : client_vec)
+	{
+		NetworkManager::recvFromClient(j.p_socket, buffer);
+		strcpy(*i.buffer, buffer);
+	}
