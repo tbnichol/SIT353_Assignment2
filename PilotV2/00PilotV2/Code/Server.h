@@ -41,4 +41,7 @@ public:
 	bool addClient(unsigned int & clientID);
 	void checkForClientUpdates();
 	void castClientChanges();
+
+	// receive
+	//int recvMessage(unsigned int clientID, char * buffer);
 };

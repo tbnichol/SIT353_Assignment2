@@ -24,7 +24,7 @@ public:
 
 
 // NetworkData.... **
-#define PACKET_MAXSIZE 1000000
+//#define MESSAGE_MAXSIZE 1000000
 // Types of message packets that can be sent
 enum MessageType { CONNECT = 0,	ACTION = 1,};
 

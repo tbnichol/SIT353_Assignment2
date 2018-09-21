@@ -70,6 +70,26 @@ void Server::checkForClientUpdates()
 	ShipSendData i;
 	for (Player j : client_vec)
 	{
-		NetworkManager::recvFromClient(j.p_socket, buffer);
+		NetworkManager::recvMessage(j.p_socket, buffer);
 		strcpy(*i.buffer, buffer);
 	}
+}
+
+
+// receive
+/*
+int Server::recvMessage(unsigned int clientID, char * buffer)
+{
+	if (clients_map.find(clientID) != clients_map.end())
+	{
+		SOCKET socket_d = clients_map[clientID];
+		result = NetworkManager::recvMessage(socket_d, buffer);
+		if (iResult == 0)
+		{
+			printf("Connection closed\n");
+			closesocket(currentSocket);
+		}
+		return iResult;
+	}
+	return 0;
+}*/
