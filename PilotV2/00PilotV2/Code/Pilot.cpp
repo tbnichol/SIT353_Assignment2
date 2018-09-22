@@ -44,6 +44,7 @@ before deploying relevant quieries and functions..*/
 
 int main(int argc, char * argv [])
 {
+	std::thread * runThread;
 	QuickDraw window;
 	View & view = (View &) window;
 	Controller & controller = (Controller &) window;
@@ -71,7 +72,8 @@ int main(int argc, char * argv [])
 
 	if (argc > 1) {
 		client = new GameClientSide("127.0.0.1", *ship);
-		// run client loop	
+		// run client loop
+		runThread = new std::thread(&runClient);
 		//_beginthread(runClient, 0, (void*)12, &ship);
 		// TO DO: Discuss the use of modern C++11 standard threads, instead of C++98 processes
 	}

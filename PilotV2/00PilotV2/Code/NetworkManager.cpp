@@ -17,7 +17,7 @@ NetworkManager::~NetworkManager() {
 int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut) 
 {
 	// try send
-	int result = send(socket_d, messageOut, sizeof(messageOut), 0);
+	int result = send(socket_d, messageOut, (int)strlen(messageOut), 0);
 	
 	// succesful
 	if (result != SOCKET_ERROR) 
@@ -32,7 +32,7 @@ int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut)
 int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) 
 {
 	// try receive
-	int result = recv(socket_d, messageIn, sizeof(messageIn), 0);
+	int result = recv(socket_d, messageIn, (int)strlen(messageIn), 0);
 	
 	// succesful
 	if (result != SOCKET_ERROR) 

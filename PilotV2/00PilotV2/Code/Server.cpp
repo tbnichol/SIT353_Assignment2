@@ -96,6 +96,10 @@ int Server::recvMessage(unsigned int clientID, char * buffer)
 			std::cout << "Connection closed" << std::endl;
 			closesocket(socket_d);
 		}
+		else if (result > 0) {
+			std::cout << buffer << std::endl;
+		}
+
 		return result;
 	}
 	// client not found in map
