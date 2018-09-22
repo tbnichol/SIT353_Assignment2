@@ -7,6 +7,7 @@
 
 #define WIN32_LEAN_AND_MEAN // Prevents windows.h from importing winsock.h project wide.
 
+
 #include "QuickDraw.h"
 #include "Timer.h"
 #include "Room.h"
@@ -29,7 +30,7 @@ void runClient()			// TODO: Move to GameClientSide or Client objects
 }
 
 // server // function to run server loop execution
-GameServerSide * server;
+Server * server;
 void runServer(void *)		// TODO: Move to GameServerSide or Server objects
 {
 	while (true)
@@ -79,7 +80,7 @@ int main(int argc, char * argv [])
 	}
 	else {
 		// initialize client/server
-		server = new GameServerSide();
+		server = new Server(model.getActors());
 		// server thread // look into this *****
 		_beginthread(runServer, 0, (void*)12);
 	}

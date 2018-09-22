@@ -1,0 +1,11 @@
+THINGS TO DO
+
+SERVER
+Create player object and add it to the relevant vector
+Create ship object within room that corresponds to the player
+'Start' reciving data from clients
+Retransmit the positions of players to the clients
+
+CLIENT
+remove ability to read its own server sent data (it'll stay completely still)
+

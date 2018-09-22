@@ -189,6 +189,9 @@
     <ClCompile Include="Code\Ship.cpp" />
     <ClCompile Include="Code\Timer.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Code\thingstodo.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

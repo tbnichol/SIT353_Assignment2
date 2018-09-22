@@ -28,4 +28,7 @@
     <ClInclude Include="Code\GameServerSide.h" />
     <ClInclude Include="Code\GameClientSide.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Code\thingstodo.txt" />
+  </ItemGroup>
 </Project>

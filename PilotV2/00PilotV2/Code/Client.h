@@ -11,11 +11,6 @@
 #include "NetworkManager.h"
 #include "Ship.h"
 
-// defines
-#define DEFAULT_BUFFER_LENGTH 512		// Buffer
-#define DEFAULT_PORT "33303"			// Port 
-//	TO DO: Change the port to be dependant ********
-
 class Client
 {
 public:	
@@ -30,6 +25,8 @@ public:
 	Ship * player_ship;
 	std::thread * networkThread;
 
+	ShipNetData shipNet;
+	ShipSendData shipSend;
 	// For error checking
 	int result;
 };

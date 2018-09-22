@@ -1,6 +1,6 @@
 #include "Server.h"
 
-Server::Server()
+Server::Server(std::vector<Actor *> ship_list) : shipList(&ship_list)
 {
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
@@ -54,12 +54,9 @@ bool Server::addClient(unsigned int & clientID)
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
 		// Add new connection to table of client sockets - TO DEPRICATE
-		//clients_map.insert(std::pair<unsigned int, SOCKET>(clientID, connection_socket_d));
-		/*Player * i; FIX THIS SHIT AS WELL
-		i->p_socket = connection_socket_d;
-		i->p_name = "Test Player";
-		client_vec.push_back(i);
-		*/return true;
+
+		//client_vec.push_back(new Player("Test Player",connection_socket_d))
+		return true;
 	}
 }
 
@@ -129,3 +126,19 @@ void Server::sendAll(char * messages)
 	}
 	}
 }
+
+void Server::UpdateGame()
+{
+	
+	// Notification of new client connection being established
+	if (addClient(clientID))
+	{
+		std::cout << "New client connected. ID: " << clientID << std::endl;
+		clientID++; //  iterate
+	}
+	// check for client messages
+	//recv_FromClient();
+	
+	// TO DO: Add in gane environment updates **************
+}
+

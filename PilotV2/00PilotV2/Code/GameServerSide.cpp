@@ -3,10 +3,10 @@
 unsigned int GameServerSide::clientID;
 
 // Constructor
-GameServerSide::GameServerSide()
+GameServerSide::GameServerSide(std::vector<Actor *> ship_list)
 {
 	// server obj
-	server = new Server();
+	server = new Server(ship_list);
 	//default ID
 	clientID = 0;	
 }
@@ -33,8 +33,6 @@ void GameServerSide::UpdateGame()
 
 void GameServerSide::recv_FromClient()
 {
-	// message obj
-	Message message;
 
 	// iterate through clients map
 	std::map<unsigned int, SOCKET>::iterator i;
@@ -48,6 +46,7 @@ void GameServerSide::recv_FromClient()
 			continue;
 		else
 		{
+			/*
 			// iterator
 			int j = 0;
 
@@ -68,7 +67,7 @@ void GameServerSide::recv_FromClient()
 				default:
 					std::cout << "Error in MESSAGE types" << std::endl; break;
 				}
-			}
+			}*/
 		}
 	}
 }
@@ -76,11 +75,13 @@ void GameServerSide::recv_FromClient()
 void GameServerSide::sendACTION()
 {
 	// Message obj
+	/*
 	Message message;
 	message.message_type = ACTION;
 	
 	char messageData[sizeof(Message)];
 	message.serialize(messageData);
-
+	
 	server->sendAll(messageData);
+	*/
 }

@@ -63,11 +63,15 @@ Client::~Client() {}
 void Client::Update() {
 	while (true)
 	{
-		ShipNetData i;
-		player_ship->getPosition(i.posx, i.posy);
-		ShipSendData j;
-		j.s_data = i;
-		NetworkManager::sendMessage(socket_d, j.buffer);
+		player_ship->getPosition(shipNet.posx, shipNet.posy);
+		shipNet.msgType = 'a';
+		shipSend.s_data = shipNet;
+		NetworkManager::sendMessage(socket_d, shipSend.buffer);
+
+		
+		if (recvMessages(shipSend.buffer) > 0)
+			player_ship->setPosition(shipSend.s_data.posx, shipSend.s_data.posy);
+
 	}
 }
 

@@ -13,7 +13,7 @@ class GameServerSide
 	char buffer[DEFAULT_BUFFER_LENGTH];
 
 public:
-	GameServerSide();
+	GameServerSide(std::vector<Actor *> ship_list);
 	~GameServerSide();
 
 	void UpdateGame();

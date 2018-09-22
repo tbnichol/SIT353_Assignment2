@@ -5,9 +5,14 @@
 #include <iostream> // Used for Debug
 #include <map>
 
+// defines
+#define DEFAULT_BUFFER_LENGTH 512		// Buffer
+#define DEFAULT_PORT "33303"			// Port 
+//	TO DO: Change the port to be dependant ********
+
 // ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
-struct ShipNetData { double posx, posy, direction; /* to discuss what we exactly need */ };
-union ShipSendData { ShipNetData s_data; char buffer[sizeof(ShipNetData)]; };
+struct ShipNetData { char msgType; std::string playerName; double posx, posy, direction; /* to discuss what we exactly need */ };
+union ShipSendData { ShipNetData s_data; char buffer[sizeof(ShipNetData)]; ShipSendData() {}; ~ShipSendData() {}; };
 
 class NetworkManager
 {
@@ -28,6 +33,7 @@ public:
 // NetworkData.... **
 //#define MESSAGE_MAXSIZE 1000000
 // Types of message packets that can be sent
+/*
 enum MessageType { CONNECT = 0,	ACTION = 1,};
 
 // to contain message data
@@ -45,4 +51,4 @@ struct Message
 	{
 		memcpy(this, data, sizeof(Message));
 	}
-};
+};*/

@@ -24,7 +24,7 @@ int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut)
 		return result;
 	// unsuccessful
 	else
-		std::cout << "WinSock Error: " << WSAGetLastError() << std::endl;
+		std::cout << "sendMessage WinSock Error: " << WSAGetLastError() << std::endl;
 }
 
 
@@ -32,12 +32,12 @@ int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut)
 int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) 
 {
 	// try receive
-	int result = recv(socket_d, messageIn, (int)strlen(messageIn), 0);
+	int result = recv(socket_d, messageIn, 512, 0);
 	
 	// succesful
 	if (result != SOCKET_ERROR) 
 		return result;
 	// unsuccessful
 	else
-		std::cout << "Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+		std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
 }
