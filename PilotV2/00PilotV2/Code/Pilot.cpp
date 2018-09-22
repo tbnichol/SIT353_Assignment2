@@ -69,7 +69,7 @@ int main(int argc, char * argv [])
 
 	double scale = 1.0;
 
-	if (argc == 1) {
+	if (argc > 1) {
 		client = new GameClientSide("127.0.0.1", *ship);
 		// run client loop	
 		//_beginthread(runClient, 0, (void*)12, &ship);

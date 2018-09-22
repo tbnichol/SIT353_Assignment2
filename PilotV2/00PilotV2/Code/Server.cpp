@@ -102,3 +102,26 @@ int Server::recvMessage(unsigned int clientID, char * buffer)
 	else
 		return 0;
 }
+
+// send (to all)
+void Server::sendAll(char * messages)
+{
+	// iterater // Why isn't this workingggggg **********************
+	std::map<unsigned int, SOCKET>::iterator i;
+
+	// socket obj
+	SOCKET socket_d;
+
+	// CLIENTS MAP NOT ACCESSABLE FROM NETWORK MANAGER
+	for (i = clients_map.begin(); i != clients_map.end(); i++)
+	{
+	socket_d = i->second;
+	int result = NetworkManager::sendMessage(socket_d, messages);
+
+	if (result == SOCKET_ERROR)
+	{
+	std::cout << "Send failed with error: " << WSAGetLastError() << std::endl;
+	closesocket(socket_d);
+	}
+	}
+}

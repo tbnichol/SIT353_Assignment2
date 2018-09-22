@@ -19,7 +19,7 @@ struct Player {
 	Ship& p_ship;
 };
 
-class Server : NetworkManager
+class Server
 {
 public:
 	// Initialise
@@ -41,6 +41,7 @@ public:
 	bool addClient(unsigned int & clientID);
 	void checkForClientUpdates();
 	void castClientChanges();
+	void sendAll(char * messages); // send message to all clients (except sender)
 
 	// receive
 	int recvMessage(unsigned int clientID, char * buffer);	

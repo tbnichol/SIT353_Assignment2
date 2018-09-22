@@ -82,5 +82,5 @@ void GameServerSide::sendACTION()
 	char messageData[sizeof(Message)];
 	message.serialize(messageData);
 
-	//server->sendAll(messageData);
+	server->sendAll(messageData);
 }
