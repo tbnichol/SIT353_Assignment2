@@ -36,7 +36,8 @@ void NetworkManager::sendAll(char * messages)
 	// socket obj
 	SOCKET socket_d;
 
-	for (i = clients_map.begin(); i != clients_map.end(); i++)
+	// CLIENTS MAP NOT ACCESSABLE FROM NETWORK MANAGER
+	/*for (i = clients_map.begin(); i != clients_map.end(); i++)
 	{
 		socket_d = i->second;
 		int result = NetworkManager::sendMessage(socket_d, messages);
@@ -46,7 +47,7 @@ void NetworkManager::sendAll(char * messages)
 			std::cout << "Send failed with error: " << WSAGetLastError() << std::endl;
 			closesocket(socket_d);
 		}
-	}
+	}*/
 }
 
 // recv

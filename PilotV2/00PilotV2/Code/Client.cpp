@@ -84,5 +84,6 @@ int Client::recvMessages(char * buffer)
 		std::cout << "Connection closed" << std::endl;
 		closesocket(socket_d);
 		WSACleanup();
+		return -1;
 	}	
 }
