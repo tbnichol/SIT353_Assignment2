@@ -14,14 +14,14 @@
 class Client
 {
 public:	
-	Client(char* address, Ship& possess);		// constructor
-	~Client();		// destructor
+	Client(char* address, Ship& possess); // constructor
+	~Client();	// destructor
 
 	void Update();
 	int recvMessages(char * buffer);
 	
 	// Connection socket 
-	SOCKET socket_d = INVALID_SOCKET; // initialise to invalid (temp)
+	SOCKET socket_d = INVALID_SOCKET;	// initialise to invalid (temp)
 	Ship * player_ship;
 	std::thread * networkThread;
 

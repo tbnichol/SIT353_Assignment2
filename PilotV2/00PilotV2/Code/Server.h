@@ -22,7 +22,7 @@ struct Player {
 	Ship* p_ship;
 };
 
-class Server
+class Server 
 {
 public:
 	// Initialise
@@ -30,26 +30,26 @@ public:
 	~Server();
 
 	// Sockets
-	SOCKET listen_socket_d = INVALID_SOCKET;;		// listening
-	SOCKET connection_socket_d = INVALID_SOCKET;; // client connection
+	SOCKET listen_socket_d = INVALID_SOCKET; // listening
+	SOCKET connection_socket_d = INVALID_SOCKET; // client connection
 
 	// For error checking
 	int result;
 	unsigned int clientID;
 
 	// table to store client sockets
-	std::map<unsigned int, SOCKET> clients_map;
+	std::map<unsigned int, SOCKET> clients_map; // to be fazed out
 	std::vector<Player*> client_vec;
-
 	std::vector<Actor *> * shipList;
-
-	// Accepts client connections
-	bool addClient(unsigned int & clientID);
-	void checkForClientUpdates();
-	void sendAll(char * messages); // send message to all clients 
-	void UpdateGame();// (except sender);
-
-
-	// receive
-	int recvMessage(unsigned int clientID, char * buffer);	
+	
+	// Accepts client connections	
+	bool addClient(unsigned int & clientID); 
+	// Detect game updates
+	void checkForClientUpdates();	
+	// Execute game updates
+	void UpdateGame();
+	// Receive packets
+	int recvMessage(unsigned int clientID, char * buffer); 
+	// Anycast updates
+	void sendAll(char * messages); 
 };
