@@ -20,12 +20,12 @@
 #include <thread> // TODO: discuss our multithreading plan
 
 // client // function to run client loop execution
-GameClientSide * client;
+Client * client;
 void runClient()			// TODO: Move to GameClientSide or Client objects
 {
 	while (true)
 	{
-		client->UpdateGame();
+		client->update();
 	}
 }
 
@@ -72,7 +72,7 @@ int main(int argc, char * argv [])
 	double scale = 1.0;
 
 	if (argc > 1) {
-		client = new GameClientSide("127.0.0.1", *ship);
+		client = new Client("127.0.0.1", *ship);
 		// run client loop
 		runThread = new std::thread(&runClient);
 		//_beginthread(runClient, 0, (void*)12, &ship);

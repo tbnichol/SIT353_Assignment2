@@ -3,6 +3,7 @@
 // constructor
 Client::Client(char* address, Ship& ship) : player_ship(&ship)
 {
+
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
 	result = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -54,23 +55,33 @@ Client::Client(char* address, Ship& ship) : player_ship(&ship)
 	char value = 1;
 	setsockopt(socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
-	networkThread = new std::thread(&Client::Update, this);
+	network_thread = new std::thread(&Client::update, this);
 }
 
 // destructor
-Client::~Client() {}
+Client::~Client() {
+	// delete some things.... **********
+}
 
-void Client::Update() {
+// update client
+void Client::update() {
 	while (true)
 	{
-		player_ship->getPosition(shipNet.posx, shipNet.posy);
-		shipNet.msgType = 'a';
-		shipSend.s_data = shipNet;
-		NetworkManager::sendMessage(socket_d, shipSend.buffer);
+		// update position
+		player_ship->getPosition(ship_net.posx, ship_net.posy);
 
+		// message type ( a == action)
+		ship_net.msgType = 'a';
+
+		// set send data to action 
+		ship_send.s_data = ship_net;
+
+		// send update
+		NetworkManager::sendMessage(socket_d, ship_send.buffer);
 		
-		if (recvMessages(shipSend.buffer) > 0)
-			player_ship->setPosition(shipSend.s_data.posx, shipSend.s_data.posy);
+		// recieve updates
+		if (recvMessages(ship_send.buffer) > 0)
+			player_ship->setPosition(ship_send.s_data.posx, ship_send.s_data.posy);
 
 	}
 }

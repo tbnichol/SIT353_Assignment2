@@ -1,3 +1,4 @@
+/* 
 #pragma once
 #include "Client.h" // Allows for utilisation of Client class functions and attributes
 
@@ -16,4 +17,5 @@ public:
 	char* address;
 	char messageData[DEFAULT_BUFFER_LENGTH];
 };
+*/
 

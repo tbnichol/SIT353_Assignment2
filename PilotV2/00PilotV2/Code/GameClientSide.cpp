@@ -1,4 +1,4 @@
-#include "GameClientSide.h" 
+/* #include "GameClientSide.h" 
 
 // constructor
 GameClientSide::GameClientSide(char* server, Ship& possess) : address(server)
@@ -6,7 +6,7 @@ GameClientSide::GameClientSide(char* server, Ship& possess) : address(server)
 	// client obj
 	client = new Client(address, possess);
 
-	/*// send connection packet	
+	/* // send connection packet	
 	 // message obj
 	message.message_type = CONNECT; //  give type
 	const unsigned int message_size = sizeof(Message); //  give size
@@ -14,7 +14,7 @@ GameClientSide::GameClientSide(char* server, Ship& possess) : address(server)
 	message.serialize(message_data);	// serialise
 	// send*/
 	//NetworkManager::sendMessage(client->socket_d, message_data);
-}
+/*}
 
 // destructor
 GameClientSide::~GameClientSide() 
@@ -47,18 +47,18 @@ void GameClientSide::UpdateGame()
 				std::cout << "Error in MESSAGE types" << std::endl;	break;
 		}
 	}
-	*/
+	*//*
 }
 
 void GameClientSide::sendACTION()
 {
-	/*// send action packet
+	/* // send action packet
 	char messageData[sizeof(Message)];
 
 	Message message;
 	message.message_type = ACTION;
 
 	message.serialize(messageData);
-	*/
+	*/ /*
 	NetworkManager::sendMessage(client->socket_d, messageData);
-}
+}*/
