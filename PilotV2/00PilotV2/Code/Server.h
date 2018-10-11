@@ -14,15 +14,6 @@
 #define DEFAULT_PORT "33303"			// Port 
 //	TO DO: Change the port to be dependant ********
 
-struct Player {
-	Player(std::string name, SOCKET socket, Ship& ship) : p_name(name), p_socket(socket), p_ship(&ship) {};
-	Player(std::string name, SOCKET socket) : p_name(name), p_socket(socket){};
-	~Player() {};
-	std::string p_name;
-	SOCKET p_socket;
-	Ship* p_ship;
-};
-
 class Server 
 {
 public:
@@ -35,24 +26,19 @@ public:
 	SOCKET connection_socket_d = INVALID_SOCKET; // client connection
 
 	// For error checking
-	int result;
-	unsigned int clientID;
+	int result; // Init Winsock
+	unsigned int client_id = 0; // Unique ID
 
 	// table to store client sockets
-	std::map<unsigned int, SOCKET> clients_map; // to be fazed out
-	std::vector<Player*> client_vec;
-	std::vector<Actor *> * shipList;
+	std::vector<Player*> client_vec; // Stores Connected Players
+	std::vector<Actor *> * ship_list; // Stores current ships
 	
 	// Accepts client connections	
 	bool addClient(unsigned int & clientID); 
 	// Detect game updates
-	void checkForClientUpdates();	
+	void recieveClientUpdates();	
 	// Execute game updates
 	void UpdateGame();
-	// Receive packets
-	int recvMessage(unsigned int clientID, char * buffer); 
 	// Anycast updates
-	void sendAll(char * messages); 
-	// Testing for movement changes
-	void sendTest();
+	void sendClientUpdates(); 
 };

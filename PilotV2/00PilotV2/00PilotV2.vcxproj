@@ -166,7 +166,6 @@
     <ClInclude Include="Code\Bullet.h" />
     <ClInclude Include="Code\Client.h" />
     <ClInclude Include="Code\GameClientSide.h" />
-    <ClInclude Include="Code\GameServerSide.h" />
     <ClInclude Include="Code\Model.h" />
     <ClInclude Include="Code\NetworkManager.h" />
     <ClInclude Include="Code\QuickDraw.h" />
@@ -180,7 +179,6 @@
     <ClCompile Include="Code\Bullet.cpp" />
     <ClCompile Include="Code\Client.cpp" />
     <ClCompile Include="Code\GameClientSide.cpp" />
-    <ClCompile Include="Code\GameServerSide.cpp" />
     <ClCompile Include="Code\NetworkManager.cpp" />
     <ClCompile Include="Code\Pilot.cpp" />
     <ClCompile Include="Code\QuickDraw.cpp" />

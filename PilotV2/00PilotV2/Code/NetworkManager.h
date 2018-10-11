@@ -1,14 +1,23 @@
 #pragma once
-
 #include <winsock2.h>
 #include <Windows.h>
 #include <iostream> // Used for Debug
 #include <map>
+#include "Ship.h"
 
 // defines
 #define DEFAULT_BUFFER_LENGTH 512		// Buffer
 #define DEFAULT_PORT "33303"			// Port 
 //	TO DO: Change the port to be dependant ********
+
+struct Player {
+	Player(std::string name, SOCKET socket, Ship& ship) : p_name(name), p_socket(socket), p_ship(&ship) {};
+	Player(std::string name, SOCKET socket) : p_name(name), p_socket(socket) {};
+	~Player() {};
+	std::string p_name;
+	SOCKET p_socket;
+	Ship* p_ship;
+};
 
 // ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
 struct ShipNetData { char msgType; std::string playerName; double posx, posy, direction; /* to discuss what we exactly need */ };
