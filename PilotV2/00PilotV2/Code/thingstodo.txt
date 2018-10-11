@@ -9,3 +9,7 @@ Retransmit the positions of players to the clients
 CLIENT
 remove ability to read its own server sent data (it'll stay completely still)
 
+DESPERATE CHANGES
+ShipNetData related things need to be moved out of the client
+We need to write down all our functions and what they do somewhere. Half of these arent probably needed
+We need to depricate GameClientSide and GameServerSide completely.

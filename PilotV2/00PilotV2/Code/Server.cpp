@@ -54,8 +54,7 @@ bool Server::addClient(unsigned int & clientID)
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
 		// Add new connection to table of client sockets - TO DEPRICATE
-
-		//client_vec.push_back(new Player("Test Player",connection_socket_d))
+		client_vec.push_back(new Player(std::string("Test Player"), connection_socket_d));
 		return true;
 	}
 }
@@ -140,5 +139,14 @@ void Server::UpdateGame()
 	//recv_FromClient();
 	
 	// TO DO: Add in gane environment updates **************
+}
+
+void Server::sendTest()
+{
+	for (Player* x : client_vec)
+	{
+		NetworkManager::sendMessage(x->p_socket, )
+	}
+
 }
 

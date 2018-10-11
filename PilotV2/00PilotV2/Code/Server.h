@@ -16,6 +16,7 @@
 
 struct Player {
 	Player(std::string name, SOCKET socket, Ship& ship) : p_name(name), p_socket(socket), p_ship(&ship) {};
+	Player(std::string name, SOCKET socket) : p_name(name), p_socket(socket){};
 	~Player() {};
 	std::string p_name;
 	SOCKET p_socket;
@@ -52,4 +53,6 @@ public:
 	int recvMessage(unsigned int clientID, char * buffer); 
 	// Anycast updates
 	void sendAll(char * messages); 
+	// Testing for movement changes
+	void sendTest();
 };
