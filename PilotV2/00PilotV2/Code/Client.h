@@ -26,21 +26,21 @@ public:
 	// client thread
 	std::thread * network_thread;
 
-	// Shop (player) data
+	// ship (player) data
 	ShipNetData ship_net;
 	ShipSendData ship_send;
 
-	// client obj
-	// Client* client;
-
+	// game update
 	void update();
-	int recvMessages(char * buffer);
 
+	// For error checking
+	int result;
+
+	//int recvMessages(char * buffer);
 	//char* address;
 	//char messageData[DEFAULT_BUFFER_LENGTH];
 	//void sendACTION();
 	//void UpdateGame();
-
-	// For error checking
-	int result;
+	// client obj
+	// Client* client;
 };

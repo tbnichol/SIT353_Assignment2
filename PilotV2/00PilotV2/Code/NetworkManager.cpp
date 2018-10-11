@@ -36,10 +36,13 @@ int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn)
 	int result = recv(socket_d, messageIn, 512, 0);
 	
 	// succesful
-	if (result != SOCKET_ERROR)
+	if (result != SOCKET_ERROR && result != 0)
 		return result;
 	// unsuccessful
 	else
+		std::cout << "Connection closed" << std::endl;
+		closesocket(socket_d);
+		WSACleanup();
 		return -1;
 		//std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
 }

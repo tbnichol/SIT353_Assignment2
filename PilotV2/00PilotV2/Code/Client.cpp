@@ -1,6 +1,6 @@
 #include "Client.h"
 
-// constructor
+// Constructor //
 Client::Client(char* address, Ship& ship) : player_ship(&ship)
 {
 
@@ -58,12 +58,15 @@ Client::Client(char* address, Ship& ship) : player_ship(&ship)
 	network_thread = new std::thread(&Client::update, this);
 }
 
-// destructor
+// Destructor // 
 Client::~Client() {
-	// delete some things.... **********
+	// disconnect client
+	std::cout << "Client " << this->socket_d << "disconnected. Connection closed..." << std::endl;
+	closesocket(this->socket_d);
+	WSACleanup();
 }
 
-// update client
+// Update Client //
 void Client::update() {
 	while (true)
 	{
@@ -80,25 +83,7 @@ void Client::update() {
 		NetworkManager::sendMessage(socket_d, ship_send.buffer);
 		
 		// recieve updates
-		if (recvMessages(ship_send.buffer) > 0)
+		if (NetworkManager::recvMessage(socket_d, ship_send.buffer) > 0)
 			player_ship->setPosition(ship_send.s_data.posx, ship_send.s_data.posy);
-
 	}
-}
-
-int Client::recvMessages(char * buffer)
-{
-	result = NetworkManager::recvMessage(socket_d, buffer);
-
-	// successful
-	if (result != 0)
-		return result;
-	// unseccessful
-	else
-	{
-		std::cout << "Connection closed" << std::endl;
-		closesocket(socket_d);
-		WSACleanup();
-		return -1;
-	}	
 }
