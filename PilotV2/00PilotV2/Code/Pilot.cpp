@@ -12,7 +12,7 @@
 #include "Timer.h"
 #include "Room.h"
 #include "Ship.h"
-#include "GameServerSide.h"
+#include "Server.h"
 #include "GameClientSide.h"
 
 #include <sstream>

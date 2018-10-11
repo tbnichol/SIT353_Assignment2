@@ -1,6 +1,6 @@
 #include "Server.h"
 
-Server::Server(std::vector<Actor *> ship_list) : shipList(&ship_list)
+Server::Server(std::vector<Actor *> shipList) : ship_list(&shipList)
 {
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
@@ -59,94 +59,29 @@ bool Server::addClient(unsigned int & clientID)
 	}
 }
 
-void Server::checkForClientUpdates()
+void Server::recieveClientUpdates()
 {
-	/*int result;
-	char * buffer;
-	ShipSendData i;
-	for (Player *j : client_vec)
-	{
-		NetworkManager::recvMessage(j.p_socket, buffer);
-		strcpy(*i.buffer, buffer);
-	}
-		NetworkManager::recvFromClient(j->p_socket, buffer);
-		//strcpy_s(i.buffer[DEFAULT_BUFFER_LENGTH], buffer); FIX THIS SHIT AT SOME POINT
-		j->p_ship.setPosition(i.s_data.posx, i.s_data.posy);
-	}*/
+
 }
 
-// receive
-int Server::recvMessage(unsigned int clientID, char * buffer)
+void Server::sendClientUpdates()
 {
-	// if client ID was found
-	if (clients_map.find(clientID) != clients_map.end())
-	{
-		// make client ID current socket
-		SOCKET socket_d = clients_map[clientID];
 
-		// receive message
-		result = NetworkManager::recvMessage(socket_d, buffer);
-		// if needed, close connection to this client
-		if (result == 0)
-		{
-			std::cout << "Connection closed" << std::endl;
-			closesocket(socket_d);
-		}
-		else if (result > 0) {
-			std::cout << buffer << std::endl;
-		}
-
-		return result;
-	}
-	// client not found in map
-	else
-		return 0;
-}
-
-// send (to all)
-void Server::sendAll(char * messages)
-{
-	// iterater // Why isn't this workingggggg **********************
-	std::map<unsigned int, SOCKET>::iterator i;
-
-	// socket obj
-	SOCKET socket_d;
-
-	// CLIENTS MAP NOT ACCESSABLE FROM NETWORK MANAGER
-	for (i = clients_map.begin(); i != clients_map.end(); i++)
-	{
-	socket_d = i->second;
-	int result = NetworkManager::sendMessage(socket_d, messages);
-
-	if (result == SOCKET_ERROR)
-	{
-	std::cout << "Send failed with error: " << WSAGetLastError() << std::endl;
-	closesocket(socket_d);
-	}
-	}
 }
 
 void Server::UpdateGame()
 {
 	
 	// Notification of new client connection being established
-	if (addClient(clientID))
+	if (addClient(client_id))
 	{
-		std::cout << "New client connected. ID: " << clientID << std::endl;
-		clientID++; //  iterate
+		std::cout << "New client connected. ID: " << client_id << std::endl;
+		client_id++; //  iterate
 	}
+
+	recieveClientUpdates();
 	// check for client messages
-	//recv_FromClient();
 	
-	// TO DO: Add in gane environment updates **************
+	sendClientUpdates();
+	// send any client changes
 }
-
-void Server::sendTest()
-{
-	for (Player* x : client_vec)
-	{
-		NetworkManager::sendMessage(x->p_socket, )
-	}
-
-}
-
