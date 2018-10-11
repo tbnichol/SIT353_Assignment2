@@ -1,6 +1,6 @@
 #include "Server.h"
 
-Server::Server(std::vector<Actor *> shipList) : ship_list(&shipList)
+Server::Server(std::vector<Actor *> shipList, Controller& cont) : ship_list(&shipList), cont_ptr(&cont)
 {
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
@@ -54,7 +54,15 @@ bool Server::addClient(unsigned int & clientID)
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
 		// Add new connection to table of client sockets - TO DEPRICATE
-		client_vec.push_back(new Player(std::string("Test Player"), connection_socket_d));
+		Ship* temp_ship = new Ship(*cont_ptr, Ship::NETPLAYER, "New Player");
+		client_vec.emplace_back(new Player(std::string("Test Player"), connection_socket_d, *temp_ship
+		));
+
+
+		//ship_list->push_back(temp_ship);
+		// Push ship back into the list. To fix ******************************
+		
+		
 		return true;
 	}
 }
@@ -66,10 +74,24 @@ void Server::recieveClientUpdates()
 
 void Server::sendClientUpdates()
 {
+	ShipNetData x;
+	x.msgType = 'a';
+	x.posx = 5.0;
+	x.posy = 5.0;
+	x.direction = 4.5;
 
+	char buffer[sizeof(x)];
+	memcpy(&buffer, &x, sizeof(x));
+
+	//send_data->s_data = *send_net;
+	// Above line throws a memory exception
+	for (Player* i : client_vec)
+	{
+		NetworkManager::sendMessage(i->p_socket, buffer);
+	}
 }
 
-void Server::UpdateGame()
+void Server::update()
 {
 	
 	// Notification of new client connection being established

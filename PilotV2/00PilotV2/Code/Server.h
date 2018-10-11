@@ -8,6 +8,8 @@
 #include <vector>
 
 #pragma comment (lib, "Ws2_32.lib")
+#include "QuickDraw.h"
+#include "Ship.h"
 
 // defines
 #define DEFAULT_BUFFER_LENGTH 512		// Buffer
@@ -18,7 +20,7 @@ class Server
 {
 public:
 	// Initialise
-	Server(std::vector<Actor *> ship_list);
+	Server(std::vector<Actor *> ship_list, Controller& cont);
 	~Server();
 
 	// Sockets
@@ -29,6 +31,11 @@ public:
 	int result; // Init Winsock
 	unsigned int client_id = 0; // Unique ID
 
+	// Used for ship spawns
+	Controller * cont_ptr;
+	ShipNetData * send_net = new ShipNetData();
+	ShipSendData * send_data = new ShipSendData();
+
 	// table to store client sockets
 	std::vector<Player*> client_vec; // Stores Connected Players
 	std::vector<Actor *> * ship_list; // Stores current ships
@@ -38,7 +45,7 @@ public:
 	// Detect game updates
 	void recieveClientUpdates();	
 	// Execute game updates
-	void UpdateGame();
+	void update();
 	// Anycast updates
 	void sendClientUpdates(); 
 };

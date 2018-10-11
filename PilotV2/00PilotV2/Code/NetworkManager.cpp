@@ -25,7 +25,7 @@ int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut)
 	// unsuccessful
 	else
 		std::cout << "sendMessage WinSock Error: " << WSAGetLastError() << std::endl;
-	
+	return -1;
 }
 
 

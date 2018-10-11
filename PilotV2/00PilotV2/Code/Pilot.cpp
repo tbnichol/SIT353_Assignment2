@@ -35,7 +35,7 @@ void runServer(void *)		// TODO: Move to GameServerSide or Server objects
 {
 	while (true)
 	{
-		server->UpdateGame();
+		server->update();
 	}
 }
 
@@ -80,7 +80,7 @@ int main(int argc, char * argv [])
 	}
 	else {
 		// initialize client/server
-		server = new Server(model.getActors());
+		server = new Server(model.getActors(), controller);
 		// server thread // look into this *****
 		_beginthread(runServer, 0, (void*)12);
 	}

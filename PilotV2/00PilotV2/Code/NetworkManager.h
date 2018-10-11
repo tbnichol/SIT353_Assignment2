@@ -21,7 +21,7 @@ struct Player {
 
 // ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
 struct ShipNetData { char msgType; std::string playerName; double posx, posy, direction; /* to discuss what we exactly need */ };
-union ShipSendData { ShipNetData s_data; char buffer[sizeof(ShipNetData)]; ShipSendData() {}; ~ShipSendData() {}; };
+union ShipSendData { ShipNetData s_data; char buffer[1000]; ShipSendData() {}; ~ShipSendData() {}; };
 
 class NetworkManager
 {
@@ -37,27 +37,3 @@ public:
 
 	enum ManagerType { SERVER, CLIENT };
 };
-
-
-// NetworkData.... **
-//#define MESSAGE_MAXSIZE 1000000
-// Types of message packets that can be sent
-/*
-enum MessageType { CONNECT = 0,	ACTION = 1,};
-
-// to contain message data
-struct Message 
-{
-	// type
-	unsigned int message_type;
-
-	void serialize(char * data)
-	{
-		memcpy(data, this, sizeof(Message));
-	}
-
-	void deserialize(char * data) 
-	{
-		memcpy(this, data, sizeof(Message));
-	}
-};*/
