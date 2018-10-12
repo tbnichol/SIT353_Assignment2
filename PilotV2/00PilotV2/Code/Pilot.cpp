@@ -15,12 +15,12 @@
 #include "Server.h"
 
 #include <sstream>
-#include <process.h> 
-#include <thread> 
+#include <process.h> // TODO: discuss our multithreading plan
+#include <thread> // TODO: discuss our multithreading plan
 
 // client // function to run client loop execution
 Client * client;
-void runClient()			
+void runClient()
 {
 	while (true)
 	{
@@ -39,20 +39,22 @@ void runServer(void *)
 }
 
 // Base game main 
+/* TO DO: This will be determining if user is a client or a server
+before deploying relevant quieries and functions..*/
 
-int main(int argc, char * argv [])
+int main(int argc, char * argv[])
 {
 	std::thread * runThread;
 	QuickDraw window;
-	View & view = (View &) window;
-	Controller & controller = (Controller &) window;
+	View & view = (View &)window;
+	Controller & controller = (Controller &)window;
 
-	Room model (-500, 500, 500, -500);
+	Room model(-500, 500, 500, -500);
 
 	// Create a timer to measure the real time since the previous game cycle.
 	Timer timer;
-	timer.mark (); // zero the timer.
-	double lasttime = timer.interval ();
+	timer.mark(); // zero the timer.
+	double lasttime = timer.interval();
 	double avgdeltat = 0.0;
 
 	double scale = 1.0;
@@ -60,41 +62,47 @@ int main(int argc, char * argv [])
 	bool amClient = false;
 
 	// initialize client/server //
-	// client
-	if (argc > 1) {
-		amClient = true;
-
-		// create player ship
-		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
-		model.addActor (ship);
-
-		// query client for server address
-		std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
-		char input[16];
-		std::cin >> input;
-		
-		// pass to server
-		client = new Client(input, *ship);
-
-		// run client loop
-		runThread = new std::thread(&runClient);
-	}
 	// server
-	else {
-
+	if (argc > 2) {
 		// broaden display
 		scale = 0.8;
 		server = new Server(&model, controller);
-		
+
 		// server thread
 		//runThread = new std::thread(&runServer);
 		_beginthread(runServer, 0, (void*)12);
+	}
+	// client
+	else {
+		amClient = true;
+
+		// create player ship
+		Ship * ship = new Ship(controller, Ship::INPLAY, "You");
+		model.addActor(ship);
+
+		if (argc == 1)
+		{
+			// query client for server address
+			std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
+			char input[16];
+			std::cin >> input;
+
+			// pass to server
+			client = new Client(input, *ship);
+		}
+		else
+		{
+			client = new Client(argv[1], *ship);
+		}
+
+		// run client loop
+		runThread = new std::thread(&runClient);
 	}
 
 	while (true)
 	{
 		// Calculate the time since the last iteration.
-		double currtime = timer.interval ();
+		double currtime = timer.interval();
 		double deltat = currtime - lasttime;
 
 		// Run a smoothing step on the time change, to overcome some of the
@@ -104,27 +112,34 @@ int main(int argc, char * argv [])
 		lasttime = lasttime + deltat;
 
 		// Allow the environment to update.
-		model.update (deltat);
+		model.update(deltat);
 
 		// Schedule a screen update event.
-		view.clearScreen ();
+		view.clearScreen();
+
+		// score 
+		std::ostringstream txtDisplay;
 
 		// display
 		double x = 0, y = 0;
-		if (amClient) 
+		if (amClient)
 		{
 			// camera
 			client->player_ship->getPosition(x, y);
 
 			// score
-			std::ostringstream score;
-			score << "Score: " << client->player_ship->getScore();
-			view.drawText(20, 20, score.str(), 0, 0, 255);
+			txtDisplay << "Score: " << client->player_ship->getScore();
 		}
+		else
+		{
+			txtDisplay << "Server initialised. \nIP: " << argv[1] << "\nName: " << argv[2];
+		}
+		// display text
+		view.drawText(20, 20, txtDisplay.str(), 0, 0, 255);
+
 		model.display(view, x, y, scale);
 
-		
-		view.swapBuffer ();
+		view.swapBuffer();
 	}
 
 	delete client;
