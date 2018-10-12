@@ -56,6 +56,8 @@ Client::~Client() {
 	// disconnect client
 	std::cout << "Client " << this->socket_d << "disconnected. Connection closed..." << std::endl;
 	closesocket(this->socket_d);
+
+	delete player_ship;
 }
 
 // Update Client //

@@ -34,7 +34,9 @@ Server::Server(Room* shipList, Controller& cont) : ship_list(shipList), cont_ptr
 }
 
 // destructor
-Server::~Server() {}
+Server::~Server() {
+
+}
 
 // Accepts client connections
 bool Server::addClient(unsigned int & clientID)
@@ -70,11 +72,13 @@ void Server::recieveClientUpdates()
 	char buffer[sizeof(recv_ship)];
 	for (Player* i : client_vec)
 	{
-		NetworkManager::recvMessage(i->p_socket, buffer, sizeof(buffer));
-		memcpy(&recv_ship, &buffer, sizeof(buffer));
-		i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
-		i->p_ship->direction = recv_ship.direction;
-		i->p_ship->mode = recv_ship.mode;
+		if ((NetworkManager::recvMessage(i->p_socket, buffer, sizeof(buffer))) > 0) {
+			memcpy(&recv_ship, &buffer, sizeof(buffer));
+			i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
+			i->p_ship->direction = recv_ship.direction;
+			i->p_ship->mode = recv_ship.mode;
+		}
+		
 	}
 }
 
