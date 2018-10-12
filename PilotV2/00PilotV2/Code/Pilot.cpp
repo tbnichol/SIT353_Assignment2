@@ -50,19 +50,11 @@ int main(int argc, char * argv [])
 	Controller & controller = (Controller &) window;
 
 	Room model (-500, 500, 500, -500);
-	//Ship * ship = new Ship (controller, Ship::INPLAY, "You");
-	//model.addActor (ship);
 
 	// Add some opponents. These are computer controlled - for the moment...
 	Ship * opponent;
 	opponent = new Ship(controller, Ship::AUTO, "Dale");
 	model.addActor(opponent);
-	opponent= new Ship (controller, Ship::AUTO, "Mick");
-	model.addActor (opponent);
-	opponent = new Ship (controller, Ship::AUTO, "Jane");
-	model.addActor (opponent);
-	opponent = new Ship (controller, Ship::AUTO, "Cedrick");
-	model.addActor (opponent);
 
 	// Create a timer to measure the real time since the previous game cycle.
 	Timer timer;
@@ -72,9 +64,13 @@ int main(int argc, char * argv [])
 
 	double scale = 1.0;
 
+	bool amClient = false;
+
 	if (argc > 1) {
 		//model.getActors(opponent)
 		// create player ship
+		amClient = true;
+
 		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
 		model.addActor (ship);
 		client = new Client("127.0.0.1", *ship);
@@ -85,6 +81,8 @@ int main(int argc, char * argv [])
 	}
 	else {
 		// initialize client/server
+		// broaden display
+		scale = 0.8;
 		server = new Server(&model, controller);
 		// server thread // look into this *****
 		_beginthread(runServer, 0, (void*)12);
@@ -107,14 +105,22 @@ int main(int argc, char * argv [])
 
 		// Schedule a screen update event.
 		view.clearScreen ();
-		double offsetx = 0.0;
-		double offsety = 0.0;
-		// (*ship).getPosition (offsetx, offsety); ********************************* Bring back
-		model.display (view, offsetx, offsety, scale);
 
-		std::ostringstream score;
-		// score << "Score: " << ship->getScore (); ********************************* Bring back
-		view.drawText (20, 20, score.str (), 0, 0, 255);
+		// display
+		double x = 0, y = 0;
+		if (amClient) 
+		{
+			// camera
+			client->player_ship->getPosition(x, y);
+
+			// score
+			std::ostringstream score;
+			score << "Score: " << client->player_ship->getScore();
+			view.drawText(20, 20, score.str(), 0, 0, 255);
+		}
+		model.display(view, x, y, scale);
+
+		
 		view.swapBuffer ();
 	}
 
