@@ -69,12 +69,6 @@ void Server::recieveClientUpdates()
 {
 	ShipNetData recv_ship;
 
-	// Default Values
-	recv_ship.msgType = 'a';
-	recv_ship.posx = 5.0;
-	recv_ship.posy = 5.0;
-	recv_ship.direction = 4.5;
-
 	char buffer[sizeof(*send_net)];
 	for (Player* i : client_vec)
 	{
@@ -83,16 +77,13 @@ void Server::recieveClientUpdates()
 		i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
 
 
+
 	}
 }
 
 void Server::sendClientUpdates()
 {
 	ShipNetData x;
-	x.msgType = 'a';
-	x.posx = 5.0;
-	x.posy = 5.0;
-	x.direction = 4.5;
 
 	char buffer[sizeof(x)];
 	memcpy(&buffer, &x, sizeof(x));
