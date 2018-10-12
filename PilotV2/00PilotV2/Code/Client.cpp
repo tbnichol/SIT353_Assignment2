@@ -55,7 +55,7 @@ Client::Client(char* address, Ship& ship) : player_ship(&ship)
 	char value = 1;
 	setsockopt(socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
-	network_thread = new std::thread(&Client::update, this);
+	//network_thread = new std::thread(&Client::update, this);
 }
 
 // Destructor // 

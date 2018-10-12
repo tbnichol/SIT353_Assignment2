@@ -44,5 +44,5 @@ int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn)
 		closesocket(socket_d);
 		WSACleanup();
 		return -1;
-		//std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+		std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
 }

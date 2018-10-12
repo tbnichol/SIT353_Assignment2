@@ -71,7 +71,7 @@ int main(int argc, char * argv [])
 
 	double scale = 1.0;
 
-	if (argc > 1) {
+	if (argc = 1) {
 		client = new Client("127.0.0.1", *ship);
 		// run client loop
 		runThread = new std::thread(&runClient);
@@ -80,7 +80,7 @@ int main(int argc, char * argv [])
 	}
 	else {
 		// initialize client/server
-		server = new Server(model.getActors(), controller);
+		server = new Server(&model, controller);
 		// server thread // look into this *****
 		_beginthread(runServer, 0, (void*)12);
 	}

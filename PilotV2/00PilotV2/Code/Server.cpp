@@ -1,6 +1,6 @@
 #include "Server.h"
 
-Server::Server(std::vector<Actor *> shipList, Controller& cont) : ship_list(&shipList), cont_ptr(&cont)
+Server::Server(Room* shipList, Controller& cont) : ship_list(shipList), cont_ptr(&cont)
 {
 	// Messy process with windows networking - "start" the networking API.
 	WSADATA wsaData; // Stores win socket init info
@@ -59,7 +59,7 @@ bool Server::addClient(unsigned int & clientID)
 		));
 
 
-		//ship_list->push_back(temp_ship);
+		ship_list->addActor(temp_ship);
 		// Push ship back into the list. To fix ******************************
 		
 		

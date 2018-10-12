@@ -2,6 +2,7 @@
 #include "NetworkManager.h"
 #include "Client.h"
 #include "Actor.h"
+#include "Room.h"
 
 #include <ws2tcpip.h>
 #include <map>
@@ -20,7 +21,7 @@ class Server
 {
 public:
 	// Initialise
-	Server(std::vector<Actor *> ship_list, Controller& cont);
+	Server(Room* ship_list, Controller& cont);
 	~Server();
 
 	// Sockets
@@ -38,7 +39,7 @@ public:
 
 	// table to store client sockets
 	std::vector<Player*> client_vec; // Stores Connected Players
-	std::vector<Actor *> * ship_list; // Stores current ships
+	Room * ship_list;
 	
 	// Accepts client connections	
 	bool addClient(unsigned int & clientID); 
