@@ -15,8 +15,8 @@
 #include "Server.h"
 
 #include <sstream>
-#include <process.h> // TODO: discuss our multithreading plan
-#include <thread> // TODO: discuss our multithreading plan
+#include <process.h> 
+#include <thread> 
 
 // client // function to run client loop execution
 Client * client;
@@ -39,8 +39,6 @@ void runServer(void *)
 }
 
 // Base game main 
-/* TO DO: This will be determining if user is a client or a server 
-before deploying relevant quieries and functions..*/
 
 int main(int argc, char * argv [])
 {
@@ -63,7 +61,7 @@ int main(int argc, char * argv [])
 
 	// initialize client/server //
 	// client
-	if (argc == 1) {
+	if (argc > 1) {
 		amClient = true;
 
 		// create player ship
@@ -81,12 +79,8 @@ int main(int argc, char * argv [])
 		// run client loop
 		runThread = new std::thread(&runClient);
 	}
-	// server																	//  server should give ip (distinguish on launch) ****
+	// server
 	else {
-		// Add some opponents. These are computer controlled - for the moment...
-		Ship * opponent;
-		opponent = new Ship(controller, Ship::AUTO, "Dale");
-		model.addActor(opponent);
 
 		// broaden display
 		scale = 0.8;

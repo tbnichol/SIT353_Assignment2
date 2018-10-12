@@ -20,7 +20,7 @@ Server::Server(Room* shipList, Controller& cont) : ship_list(shipList), cont_ptr
 	// Create a SOCKET for connecting to server
 	listen_socket_d = socket(addr_result->ai_family, addr_result->ai_socktype, addr_result->ai_protocol);
 
-	// disable bloacking
+	// disable blocking
 	u_long iMode = 1;
 	ioctlsocket(listen_socket_d, FIONBIO, &iMode);
 
@@ -51,13 +51,13 @@ bool Server::addClient(unsigned int & clientID)
 		char value = 1;
 		setsockopt(connection_socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
-		// Add new connection to table of client sockets - TO DEPRICATE
+		// Add new Player to client_vec and to the game
 		Ship* temp_ship = new Ship(*cont_ptr, Ship::NETPLAYER, "New Player");
 		client_vec.emplace_back(new Player(std::string("Test Player"), connection_socket_d, *temp_ship
 		));
 
-		ship_list->addActor(temp_ship);
 		// Push ship back into the list.
+		ship_list->addActor(temp_ship);
 		
 		return true;
 	}
@@ -75,9 +75,6 @@ void Server::recieveClientUpdates()
 		i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
 		i->p_ship->direction = recv_ship.direction;
 		i->p_ship->mode = recv_ship.mode;
-
-
-
 	}
 }
 

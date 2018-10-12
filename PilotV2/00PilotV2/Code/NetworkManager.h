@@ -1,14 +1,13 @@
 #pragma once
 #include <winsock2.h>
 #include <Windows.h>
-#include <iostream> // Used for Debug
+#include <iostream>
 #include <map>
 #include "Ship.h"
 
 // defines
 #define DEFAULT_BUFFER_LENGTH 512		// Buffer
 #define DEFAULT_PORT "33303"			// Port 
-//	TO DO: Change the port to be dependant ********
 
 struct Player {
 	Player(std::string name, SOCKET socket, Ship& ship) : p_name(name), p_socket(socket), p_ship(&ship) {};
@@ -20,14 +19,13 @@ struct Player {
 };
 
 /* ShipNetData contains data to send over the network. 
-ShipSendData allows us to grab an array of bytes of said 
-data. */
+Memcpy allows us to serialise this data into an array of chars (bytes)*/
 struct ShipNetData { 
-	char msgType; 
-	double posx = 0; 
-	double posy = 0; 
-	double direction = 0;
-	int mode = 0;
+	char msgType;			// Type of message to the server
+	double posx = 0;		// X Position 
+	double posy = 0;		// Y Position
+	double direction = 0;	// Direction of ship
+	int mode = 0;			// Current State (RECOVERY or INPLAY)
 };
 union ShipSendData { 
 	ShipNetData s_data; 
