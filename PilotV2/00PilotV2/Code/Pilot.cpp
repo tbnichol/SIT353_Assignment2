@@ -63,7 +63,7 @@ int main(int argc, char * argv [])
 
 	// initialize client/server //
 	// client
-	if (argc = 1) {
+	if (argc > 1) {
 		amClient = true;
 
 		// create player ship
