@@ -18,37 +18,37 @@ int NetworkManager::sendMessage(SOCKET socket_d, char* messageOut)
 {
 	int x = strlen(messageOut);
 	// try send
-	int result = send(socket_d, messageOut, 20, 0);
+	int result = send(socket_d, messageOut, sizeof(ShipNetData), 0);
 	
 	// succesful
 	if (result != SOCKET_ERROR) 
 		return result;
 	// unsuccessful
 	else
-		std::cout << "sendMessage WinSock Error: " << WSAGetLastError() << std::endl;
+		//std::cout << "sendMessage WinSock Error: " << WSAGetLastError() << std::endl;
 	return -1;
 }
 
 
 // recv
-int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) 
+int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn, int bufLen) 
 {
-	char recBuffer[DEFAULT_BUFFER_LENGTH];
 	// try receive
-	int result = recv(socket_d, recBuffer, DEFAULT_BUFFER_LENGTH, 0);
+	int result = recv(socket_d, messageIn, bufLen, 0);
 	
 	// succesful
-	if (result != SOCKET_ERROR && result != 0) {
-
-		return result;
+	if (result == SOCKET_ERROR) {
+		//std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+		return -1;
 	}
 	// unsuccessful
-	else {
+	else if (result == 0) {
 		std::cout << "Connection closed" << std::endl;
 		closesocket(socket_d);
 		WSACleanup();
 		return -1;
-		std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
-
+	}
+	else {
+		return result;
 	}
 }

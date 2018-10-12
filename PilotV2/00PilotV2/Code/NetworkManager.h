@@ -25,6 +25,7 @@ struct ShipNetData {
 	double posx = 0; 
 	double posy = 0; 
 	double direction = 0;
+	int mode = 0;
 };
 union ShipSendData { ShipNetData s_data; char buffer[1000]; ShipSendData() {}; ~ShipSendData() {}; };
 
@@ -38,7 +39,7 @@ public:
 
 	static int sendMessage(SOCKET socket_d, char * messageOut);
 	
-	static int recvMessage(SOCKET socket_d, char * messageIn);
+	static int recvMessage(SOCKET socket_d, char * messageIn, int bufLen);
 
 	enum ManagerType { SERVER, CLIENT };
 };

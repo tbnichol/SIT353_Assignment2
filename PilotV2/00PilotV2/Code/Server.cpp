@@ -69,12 +69,14 @@ void Server::recieveClientUpdates()
 {
 	ShipNetData recv_ship;
 
-	char buffer[sizeof(*send_net)];
+	char buffer[sizeof(recv_ship)];
 	for (Player* i : client_vec)
 	{
-		NetworkManager::recvMessage(i->p_socket, buffer);
+		NetworkManager::recvMessage(i->p_socket, buffer, sizeof(buffer));
 		memcpy(&recv_ship, &buffer, sizeof(buffer));
 		i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
+		i->p_ship->direction = recv_ship.direction;
+		i->p_ship->mode = recv_ship.mode;
 
 
 
@@ -83,10 +85,10 @@ void Server::recieveClientUpdates()
 
 void Server::sendClientUpdates()
 {
-	ShipNetData x;
+	ShipNetData send_ship;
 
-	char buffer[sizeof(x)];
-	memcpy(&buffer, &x, sizeof(x));
+	char buffer[sizeof(send_ship)];
+	memcpy(&buffer, &send_ship, sizeof(send_ship));
 
 	for (Player* i : client_vec)
 	{

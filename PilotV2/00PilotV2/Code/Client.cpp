@@ -63,7 +63,6 @@ void Client::update() {
 	while (true)
 	{
 		// update position
-		player_ship->getPosition(ship_net.posx, ship_net.posy);
 
 		// message type ( a == action)
 		ship_net.msgType = 'b';
@@ -71,6 +70,9 @@ void Client::update() {
 		ship_net.posx = 4.72094690284;
 		ship_net.posy = 20.72094690284;
 
+		ship_net.direction = player_ship->direction;
+		ship_net.mode = player_ship->mode;
+		player_ship->getPosition(ship_net.posx, ship_net.posy);
 		// set send data to action 
 		ship_send.s_data = ship_net;
 

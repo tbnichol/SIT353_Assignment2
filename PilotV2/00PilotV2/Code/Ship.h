@@ -9,13 +9,9 @@ class Ship : public Actor
 private:
 	Controller & controller;
 
-	// the angle the ship is facing.
-	double direction;
 
 	// the control mode - currently keyboard, or simple AI
 	int playmode;
-	// state for an internal state machine.
-	int mode;
 
 	// support variable, used to disable the ship for a certain amount of
 	// time, when hit.
@@ -42,6 +38,12 @@ public:
 	Ship (Controller & cntrller, int initmode, std::string name);
 	virtual ~Ship(void);
 
+	// the angle the ship is facing.
+	double direction;
+	
+	// state for an internal state machine.
+	int mode;
+	
 	// Read input and update state accordingly.
 	virtual bool update (Model & model, double deltat);
 
