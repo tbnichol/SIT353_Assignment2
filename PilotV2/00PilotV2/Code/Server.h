@@ -13,8 +13,8 @@
 #include "Ship.h"
 
 // defines
-#define DEFAULT_BUFFER_LENGTH 512		// Buffer
-#define DEFAULT_PORT "33303"			// Port 
+//#define DEFAULT_BUFFER_LENGTH 512		// Buffer
+//#define DEFAULT_PORT "33303"			// Port 
 //	TO DO: Change the port to be dependant ********
 
 class Server 

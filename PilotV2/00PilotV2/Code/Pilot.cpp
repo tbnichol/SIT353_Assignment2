@@ -13,7 +13,6 @@
 #include "Room.h"
 #include "Ship.h"
 #include "Server.h"
-#include "GameClientSide.h"
 
 #include <sstream>
 #include <process.h> // TODO: discuss our multithreading plan
@@ -21,7 +20,7 @@
 
 // client // function to run client loop execution
 Client * client;
-void runClient()			// TODO: Move to GameClientSide or Client objects
+void runClient()			
 {
 	while (true)
 	{
@@ -31,7 +30,7 @@ void runClient()			// TODO: Move to GameClientSide or Client objects
 
 // server // function to run server loop execution
 Server * server;
-void runServer(void *)		// TODO: Move to GameServerSide or Server objects
+void runServer(void *)
 {
 	while (true)
 	{
@@ -51,11 +50,13 @@ int main(int argc, char * argv [])
 	Controller & controller = (Controller &) window;
 
 	Room model (-500, 500, 500, -500);
-	Ship * ship = new Ship (controller, Ship::INPLAY, "You");
-	model.addActor (ship);
+	//Ship * ship = new Ship (controller, Ship::INPLAY, "You");
+	//model.addActor (ship);
 
 	// Add some opponents. These are computer controlled - for the moment...
 	Ship * opponent;
+	opponent = new Ship(controller, Ship::AUTO, "Dale");
+	model.addActor(opponent);
 	opponent= new Ship (controller, Ship::AUTO, "Mick");
 	model.addActor (opponent);
 	opponent = new Ship (controller, Ship::AUTO, "Jane");
@@ -72,6 +73,10 @@ int main(int argc, char * argv [])
 	double scale = 1.0;
 
 	if (argc = 1) {
+		//model.getActors(opponent)
+		// create player ship
+		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
+		model.addActor (ship);
 		client = new Client("127.0.0.1", *ship);
 		// run client loop
 		runThread = new std::thread(&runClient);
@@ -104,11 +109,11 @@ int main(int argc, char * argv [])
 		view.clearScreen ();
 		double offsetx = 0.0;
 		double offsety = 0.0;
-		(*ship).getPosition (offsetx, offsety);
+		// (*ship).getPosition (offsetx, offsety); ********************************* Bring back
 		model.display (view, offsetx, offsety, scale);
 
 		std::ostringstream score;
-		score << "Score: " << ship->getScore ();
+		// score << "Score: " << ship->getScore (); ********************************* Bring back
 		view.drawText (20, 20, score.str (), 0, 0, 255);
 		view.swapBuffer ();
 	}

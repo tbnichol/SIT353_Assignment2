@@ -35,12 +35,4 @@ public:
 
 	// For error checking
 	int result;
-
-	//int recvMessages(char * buffer);
-	//char* address;
-	//char messageData[DEFAULT_BUFFER_LENGTH];
-	//void sendACTION();
-	//void UpdateGame();
-	// client obj
-	// Client* client;
 };
