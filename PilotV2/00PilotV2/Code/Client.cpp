@@ -15,12 +15,7 @@ Client::Client(char* address, Ship& ship) : player_ship(&ship)
 	addr_info.ai_socktype = SOCK_STREAM;		// TCP
 	addr_info.ai_protocol = IPPROTO_TCP;		// TCP	
 									  
-	//resolve server address and port
-	// TO DO: potentially change this as it is currently set to localhost
-	// *******************************************************************
 	getaddrinfo(address, DEFAULT_PORT, &addr_info, &addr_result);
-	// inet_pton(AF_INET, server_IP, &(server_addr.sin_addr.s_addr)); ***
-	// *******************************************************************
 
 	// Attempt connection
 	for (sock = addr_result; sock != NULL; sock = sock->ai_next) 
@@ -54,8 +49,6 @@ Client::Client(char* address, Ship& ship) : player_ship(&ship)
 	// disable nagle algorithm (can cause latency issues)
 	char value = 1;
 	setsockopt(socket_d, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
-
-	//network_thread = new std::thread(&Client::update, this);
 }
 
 // Destructor // 
@@ -63,7 +56,6 @@ Client::~Client() {
 	// disconnect client
 	std::cout << "Client " << this->socket_d << "disconnected. Connection closed..." << std::endl;
 	closesocket(this->socket_d);
-	WSACleanup();
 }
 
 // Update Client //
@@ -91,6 +83,6 @@ void Client::sendLocalUpdates()
 	char buffer[sizeof(ship_net)];
 	memcpy(&buffer, &ship_net, sizeof(ship_net));
 	// send update
-
 	NetworkManager::sendMessage(socket_d, buffer);
+
 }
