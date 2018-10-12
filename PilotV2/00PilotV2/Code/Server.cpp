@@ -43,9 +43,7 @@ bool Server::addClient(unsigned int & clientID)
 
 	// Failed connection
 	if (connection_socket_d == 0 || connection_socket_d == INVALID_SOCKET)
-	{
 		return false;
-	}
 	// Successful connection
 	else
 	{
@@ -97,8 +95,7 @@ void Server::sendClientUpdates()
 }
 
 void Server::update()
-{
-	
+{	
 	// Notification of new client connection being established
 	if (addClient(client_id))
 	{

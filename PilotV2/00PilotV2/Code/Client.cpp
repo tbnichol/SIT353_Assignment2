@@ -64,7 +64,8 @@ void Client::update() {
 	{
 		// update position
 
-		// message type ( a == action)
+		// ** EXAMPLE DATA ** //
+		// message type
 		ship_net.msgType = 'b';
 		ship_net.direction = 5.0;
 		ship_net.posx = 4.72094690284;

@@ -19,7 +19,9 @@ struct Player {
 	Ship* p_ship;
 };
 
-// ShipNetData contains data to send over the network. ShipSendData allows us to grab an array of bytes of said data.
+/* ShipNetData contains data to send over the network. 
+ShipSendData allows us to grab an array of bytes of said 
+data. */
 struct ShipNetData { 
 	char msgType; 
 	double posx = 0; 
@@ -27,7 +29,12 @@ struct ShipNetData {
 	double direction = 0;
 	int mode = 0;
 };
-union ShipSendData { ShipNetData s_data; char buffer[1000]; ShipSendData() {}; ~ShipSendData() {}; };
+union ShipSendData { 
+	ShipNetData s_data; 
+	char buffer[1000]; 
+	ShipSendData() {}; 
+	~ShipSendData() {}; 
+};
 
 class NetworkManager
 {
