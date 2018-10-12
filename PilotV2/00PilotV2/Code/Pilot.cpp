@@ -72,7 +72,7 @@ int main(int argc, char * argv [])
 
 	double scale = 1.0;
 
-	if (argc = 1) {
+	if (argc > 1) {
 		//model.getActors(opponent)
 		// create player ship
 		Ship * ship = new Ship (controller, Ship::INPLAY, "You");

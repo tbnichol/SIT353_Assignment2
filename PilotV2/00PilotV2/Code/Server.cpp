@@ -58,10 +58,8 @@ bool Server::addClient(unsigned int & clientID)
 		client_vec.emplace_back(new Player(std::string("Test Player"), connection_socket_d, *temp_ship
 		));
 
-
 		ship_list->addActor(temp_ship);
-		// Push ship back into the list. To fix ******************************
-		
+		// Push ship back into the list.
 		
 		return true;
 	}
@@ -83,8 +81,6 @@ void Server::sendClientUpdates()
 	char buffer[sizeof(x)];
 	memcpy(&buffer, &x, sizeof(x));
 
-	//send_data->s_data = *send_net;
-	// Above line throws a memory exception
 	for (Player* i : client_vec)
 	{
 		NetworkManager::sendMessage(i->p_socket, buffer);
