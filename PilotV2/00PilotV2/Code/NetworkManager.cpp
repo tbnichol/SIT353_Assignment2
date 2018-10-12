@@ -14,10 +14,11 @@ NetworkManager::~NetworkManager() {
 }
 
 // send
-int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut) 
+int NetworkManager::sendMessage(SOCKET socket_d, char* messageOut) 
 {
+	int x = strlen(messageOut);
 	// try send
-	int result = send(socket_d, messageOut, (int)strlen(messageOut), 0);
+	int result = send(socket_d, messageOut, 20, 0);
 	
 	// succesful
 	if (result != SOCKET_ERROR) 
@@ -32,17 +33,22 @@ int NetworkManager::sendMessage(SOCKET socket_d, char * messageOut)
 // recv
 int NetworkManager::recvMessage(SOCKET socket_d, char * messageIn) 
 {
+	char recBuffer[DEFAULT_BUFFER_LENGTH];
 	// try receive
-	int result = recv(socket_d, messageIn, 512, 0);
+	int result = recv(socket_d, recBuffer, DEFAULT_BUFFER_LENGTH, 0);
 	
 	// succesful
-	if (result != SOCKET_ERROR && result != 0)
+	if (result != SOCKET_ERROR && result != 0) {
+
 		return result;
+	}
 	// unsuccessful
-	else
+	else {
 		std::cout << "Connection closed" << std::endl;
 		closesocket(socket_d);
 		WSACleanup();
 		return -1;
 		std::cout << "recvMessage Error!: Check WinSock Error Code " << WSAGetLastError() << std::endl;
+
+	}
 }

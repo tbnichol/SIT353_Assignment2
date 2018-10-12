@@ -74,16 +74,23 @@ void Client::update() {
 		player_ship->getPosition(ship_net.posx, ship_net.posy);
 
 		// message type ( a == action)
-		ship_net.msgType = 'a';
+		ship_net.msgType = 'b';
+		ship_net.direction = 5.0;
+		ship_net.posx = 4.72094690284;
+		ship_net.posy = 20.72094690284;
 
 		// set send data to action 
 		ship_send.s_data = ship_net;
+
+		sendLocalUpdates();
 	}
 }
 
 void Client::sendLocalUpdates()
 {
+	char buffer[sizeof(ship_net)];
+	memcpy(&buffer, &ship_net, sizeof(ship_net));
 	// send update
-	NetworkManager::sendMessage(socket_d, ship_send.buffer);
 
+	NetworkManager::sendMessage(socket_d, buffer);
 }
