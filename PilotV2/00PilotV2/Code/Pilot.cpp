@@ -51,11 +51,6 @@ int main(int argc, char * argv [])
 
 	Room model (-500, 500, 500, -500);
 
-	// Add some opponents. These are computer controlled - for the moment...
-	Ship * opponent;
-	opponent = new Ship(controller, Ship::AUTO, "Dale");
-	model.addActor(opponent);
-
 	// Create a timer to measure the real time since the previous game cycle.
 	Timer timer;
 	timer.mark (); // zero the timer.
@@ -66,26 +61,32 @@ int main(int argc, char * argv [])
 
 	bool amClient = false;
 
+	// initialize client/server //
+	// client
 	if (argc > 1) {
-		//model.getActors(opponent)
-		// create player ship
 		amClient = true;
 
+		// create player ship
 		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
 		model.addActor (ship);
-		client = new Client("127.0.0.1", *ship);
+		client = new Client(argv[1], *ship);
+
 		// run client loop
 		runThread = new std::thread(&runClient);
-		//_beginthread(runClient, 0, (void*)12, &ship);
-		// TO DO: Discuss the use of modern C++11 standard threads, instead of C++98 processes
 	}
+	// server
 	else {
-		// initialize client/server
+		// Add some opponents. These are computer controlled - for the moment...
+		Ship * opponent;
+		opponent = new Ship(controller, Ship::AUTO, "Dale");
+		model.addActor(opponent);
+
 		// broaden display
 		scale = 0.8;
 		server = new Server(&model, controller);
-		// server thread // look into this *****
-		_beginthread(runServer, 0, (void*)12);
+		
+		// server thread
+		runThread = new std::thread(&runServer);
 	}
 
 	while (true)
