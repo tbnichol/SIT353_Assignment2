@@ -67,11 +67,13 @@ bool Server::addClient(unsigned int & clientID)
 
 void Server::recieveClientUpdates()
 {
+	ShipNetData x;
+
 	char buffer[sizeof(*send_net)];
 	for (Player* i : client_vec)
 	{
 		NetworkManager::recvMessage(i->p_socket, buffer);
-		//i->p_ship->setPosition(x.posx, x.posy);
+		i->p_ship->setPosition(x.posx, x.posy);
 
 
 	}
@@ -80,10 +82,6 @@ void Server::recieveClientUpdates()
 void Server::sendClientUpdates()
 {
 	ShipNetData x;
-	x.msgType = 'a';
-	x.posx = 5.0;
-	x.posy = 5.0;
-	x.direction = 4.5;
 
 	char buffer[sizeof(x)];
 	memcpy(&buffer, &x, sizeof(x));
