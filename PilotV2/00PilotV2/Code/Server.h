@@ -37,6 +37,9 @@ public:
 	ShipNetData * send_net = new ShipNetData();
 	ShipSendData * send_data = new ShipSendData();
 
+	ShipNetData sendMain;
+	ShipSendData sendData;
+
 	// table to store client sockets
 	std::vector<Player*> client_vec; // Stores Connected Players
 	Room * ship_list;

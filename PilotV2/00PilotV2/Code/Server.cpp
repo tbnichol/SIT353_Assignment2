@@ -67,7 +67,16 @@ bool Server::addClient(unsigned int & clientID)
 
 void Server::recieveClientUpdates()
 {
+	char buffer[DEFAULT_BUFFER_LENGTH];
+	ShipSendData send;
+	for (Player* i : client_vec)
+	{
+		NetworkManager::recvMessage(i->p_socket, buffer);
+		sendData.s_data = sendMain;
+		//strcpy(sendData.buffer, buffer);
+		i->p_ship->setPosition(sendMain.posx, sendMain.posy);
 
+	}
 }
 
 void Server::sendClientUpdates()

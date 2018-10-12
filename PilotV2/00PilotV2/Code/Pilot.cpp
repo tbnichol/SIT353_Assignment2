@@ -86,7 +86,8 @@ int main(int argc, char * argv [])
 		server = new Server(&model, controller);
 		
 		// server thread
-		runThread = new std::thread(&runServer);
+		//runThread = new std::thread(&runServer);
+		_beginthread(runServer, 0, (void*)12);
 	}
 
 	while (true)

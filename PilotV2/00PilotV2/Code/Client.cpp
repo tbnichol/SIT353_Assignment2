@@ -78,12 +78,12 @@ void Client::update() {
 
 		// set send data to action 
 		ship_send.s_data = ship_net;
-
-		// send update
-		NetworkManager::sendMessage(socket_d, ship_send.buffer);
-		
-		// recieve updates
-		if (NetworkManager::recvMessage(socket_d, ship_send.buffer) > 0)
-			player_ship->setPosition(ship_send.s_data.posx, ship_send.s_data.posy);
 	}
+}
+
+void Client::sendLocalUpdates()
+{
+	// send update
+	NetworkManager::sendMessage(socket_d, ship_send.buffer);
+
 }

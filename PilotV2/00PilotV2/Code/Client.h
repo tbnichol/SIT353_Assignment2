@@ -33,6 +33,8 @@ public:
 	// game update
 	void update();
 
+	void sendLocalUpdates();
+
 	// For error checking
 	int result;
 };
