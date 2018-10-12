@@ -63,18 +63,24 @@ int main(int argc, char * argv [])
 
 	// initialize client/server //
 	// client
-	if (argc > 1) {
+	if (argc = 1) {
 		amClient = true;
 
 		// create player ship
 		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
 		model.addActor (ship);
-		client = new Client(argv[1], *ship);
+
+		// query client for server address
+		std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
+		char input;
+		std::cin >> input;
+		
+		client = new Client(&input, *ship);
 
 		// run client loop
 		runThread = new std::thread(&runClient);
 	}
-	// server
+	// server																	//  server should give ip (distinguish on launch) ****
 	else {
 		// Add some opponents. These are computer controlled - for the moment...
 		Ship * opponent;
