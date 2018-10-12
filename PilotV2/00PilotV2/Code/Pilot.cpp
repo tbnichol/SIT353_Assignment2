@@ -72,10 +72,11 @@ int main(int argc, char * argv [])
 
 		// query client for server address
 		std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
-		char input;
+		char input[16];
 		std::cin >> input;
 		
-		client = new Client(&input, *ship);
+		// pass to server
+		client = new Client(input, *ship);
 
 		// run client loop
 		runThread = new std::thread(&runClient);
