@@ -75,9 +75,6 @@ void Server::recieveClientUpdates()
 		i->p_ship->setPosition(recv_ship.posx, recv_ship.posy);
 		i->p_ship->direction = recv_ship.direction;
 		i->p_ship->mode = recv_ship.mode;
-
-
-
 	}
 }
 

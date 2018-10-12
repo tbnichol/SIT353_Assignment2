@@ -62,28 +62,8 @@ int main(int argc, char * argv [])
 	bool amClient = false;
 
 	// initialize client/server //
-	// client
-	if (argc == 1) {
-		amClient = true;
-
-		// create player ship
-		Ship * ship = new Ship (controller, Ship::INPLAY, "You");
-		model.addActor (ship);
-
-		// query client for server address
-		std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
-		char input[16];
-		std::cin >> input;
-		
-		// pass to server
-		client = new Client(input, *ship);
-
-		// run client loop
-		runThread = new std::thread(&runClient);
-	}
-	// server																	//  server should give ip (distinguish on launch) ****
-	else {
-		// Add some opponents. These are computer controlled - for the moment...
+	// server
+	if (argc > 2) {
 		Ship * opponent;
 		opponent = new Ship(controller, Ship::AUTO, "Dale");
 		model.addActor(opponent);
@@ -95,6 +75,32 @@ int main(int argc, char * argv [])
 		// server thread
 		//runThread = new std::thread(&runServer);
 		_beginthread(runServer, 0, (void*)12);
+	}
+	// client
+	else {
+		amClient = true;
+
+		// create player ship
+		Ship * ship = new Ship(controller, Ship::INPLAY, "You");
+		model.addActor(ship);
+
+		if (argc == 1)
+		{
+			// query client for server address
+			std::cout << "Enter the IP address of the server you wish to connect to: " << std::endl;
+			char input[16];
+			std::cin >> input;
+
+			// pass to server
+			client = new Client(input, *ship);
+		}
+		else
+		{
+			client = new Client(argv[1], *ship);
+		}
+
+		// run client loop
+		runThread = new std::thread(&runClient);
 	}
 
 	while (true)
@@ -115,6 +121,9 @@ int main(int argc, char * argv [])
 		// Schedule a screen update event.
 		view.clearScreen ();
 
+		// score 
+		std::ostringstream txtDisplay;
+
 		// display
 		double x = 0, y = 0;
 		if (amClient) 
@@ -123,12 +132,16 @@ int main(int argc, char * argv [])
 			client->player_ship->getPosition(x, y);
 
 			// score
-			std::ostringstream score;
-			score << "Score: " << client->player_ship->getScore();
-			view.drawText(20, 20, score.str(), 0, 0, 255);
+			txtDisplay << "Score: " << client->player_ship->getScore();
 		}
-		model.display(view, x, y, scale);
+		else
+		{
+			txtDisplay << "Server initialised. \nIP: " << argv[1] << "\nName: " << argv[2];
+		}
+		// display text
+		view.drawText(20, 20, txtDisplay.str(), 0, 0, 255);
 
+		model.display(view, x, y, scale);
 		
 		view.swapBuffer ();
 	}
